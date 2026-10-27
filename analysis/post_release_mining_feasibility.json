@@ -1,0 +1,788 @@
+{
+ "schema_version": 1,
+ "generated_at_utc": "2026-10-27T19:17:45Z",
+ "script": "analysis/post_release_mining_feasibility.py",
+ "smoke_run": false,
+ "parameters": {
+  "release_cutoff_utc": "2026-04-02T00:00:00Z",
+  "published_coverage_end_utc": "2026-05-12T23:59:59Z",
+  "mining_window_utc": [
+   "2026-05-13T00:00:00Z",
+   "2026-10-26T23:59:59Z"
+  ],
+  "merged_before_utc_day": "2026-10-27",
+  "tier_b_window_utc": [
+   "2025-02-01T00:00:00Z",
+   "2026-04-02T00:00:00Z"
+  ],
+  "seed": 20261027,
+  "hours_sampled": {
+   "W1": 24,
+   "W0": 12
+  },
+  "bootstrap_reps": 2000,
+  "repo_filters": [
+   "repository_resolves",
+   "outside_development_repos",
+   "outside_training_pool",
+   "not_fork_or_archived",
+   "python_share_ge_75",
+   "open_license"
+  ],
+  "pr_filters": [
+   "details_retrieved",
+   "merged_into_default_branch",
+   "one_closing_issue_same_repo",
+   "issue_closed",
+   "issue_text_gt_10_chars",
+   "files_1_to_15",
+   "touches_tests",
+   "touches_non_test_python"
+  ],
+  "min_python_share": 0.75,
+  "min_issue_chars": 11,
+  "files_changed": [
+   1,
+   15
+  ],
+  "test_path_regex": "(^|/)(tests?|testing|e2e)(/|$)|(^|/)test_[^/]*$|_tests?\\.py$|(^|/)conftest\\.py$",
+  "benchmark_subset_shape": {
+   "max_non_test_files": 3,
+   "issue_words": [
+    16,
+    1000
+   ]
+  },
+  "development_repos_excluded": [
+   "fastapi/fastapi",
+   "Textualize/rich",
+   "psf/requests",
+   "encode/httpx"
+  ],
+  "option_b_removed_repos": [
+   "agronholm/anyio",
+   "azure-samples/azure-search-openai-demo",
+   "copier-org/copier",
+   "cs-si/eodag",
+   "databricks/dbt-databricks",
+   "huggingface/huggingface_hub",
+   "keras-team/keras",
+   "microsoft/qcodes",
+   "pallets-eco/wtforms",
+   "pennylaneai/pennylane",
+   "pypa/build",
+   "pypa/twine",
+   "sigma67/ytmusicapi",
+   "tox-dev/tox"
+  ],
+  "open_licenses": "post_release_inventory.OPEN_LICENSES (OSI-approved SPDX ids or public domain)",
+  "dataset_revisions": {
+   "nebius/SWE-rebench-leaderboard": "34d5a58864acf91613740a09ec5d205228dcfa39",
+   "SWE-bench-Live/SWE-bench-Live": "b51a86422e10cfd403beb4773e5a2947953e36ec",
+   "nebius/SWE-rebench-V2": "10483de0f50fe5da545942705a76c6150171af7f",
+   "nebius/SWE-rebench": "89cdfbab4ab1bd8f5a658bb212d1b63624f4f881"
+  }
+ },
+ "training_pool_after_option_b": {
+  "v2_python_tasks_before": 7243,
+  "v2_python_repos_before": 690,
+  "removed_repos_resolved": 14,
+  "tasks_after": 6926,
+  "repos_after": 676,
+  "v2_python_repos_not_resolving_on_github": 1
+ },
+ "tier_a": {
+  "global_top_of_funnel": {
+   "query": "is:pr is:merged linked:issue language:Python",
+   "monthly_counts": {
+    "2026-04": 106177,
+    "2026-05": 141116,
+    "2026-06": 159488,
+    "2026-07": 205689,
+    "2026-08": 254580,
+    "2026-09": 316577,
+    "2026-10": 367622
+   },
+   "mining_window_count": 1395865,
+   "calibration_window_count": 155384
+  },
+  "global_random_hour_samples": {
+   "W1": {
+    "hours_in_window": 4007,
+    "hours_sampled": 24,
+    "sampled_hour_starts_utc": [
+     "2026-05-17T09:00:00Z",
+     "2026-05-17T17:00:00Z",
+     "2026-05-19T23:00:00Z",
+     "2026-05-21T12:00:00Z",
+     "2026-05-26T09:00:00Z",
+     "2026-05-30T06:00:00Z",
+     "2026-06-04T02:00:00Z",
+     "2026-06-08T02:00:00Z",
+     "2026-06-14T00:00:00Z",
+     "2026-06-14T12:00:00Z",
+     "2026-06-20T19:00:00Z",
+     "2026-06-21T17:00:00Z",
+     "2026-07-21T16:00:00Z",
+     "2026-07-23T16:00:00Z",
+     "2026-07-23T22:00:00Z",
+     "2026-07-25T21:00:00Z",
+     "2026-08-05T01:00:00Z",
+     "2026-08-15T14:00:00Z",
+     "2026-08-23T03:00:00Z",
+     "2026-09-14T08:00:00Z",
+     "2026-09-22T12:00:00Z",
+     "2026-09-27T22:00:00Z",
+     "2026-09-30T10:00:00Z",
+     "2026-10-21T06:00:00Z"
+    ],
+    "prs_in_sampled_hours": 7120,
+    "funnel": [
+     {
+      "step": "merged, issue-linked PRs returned by search",
+      "prs": 7120,
+      "repos": 3952
+     },
+     {
+      "step": "repository_resolves",
+      "prs": 7120,
+      "repos": 3952
+     },
+     {
+      "step": "outside_development_repos",
+      "prs": 7120,
+      "repos": 3952
+     },
+     {
+      "step": "outside_training_pool",
+      "prs": 7068,
+      "repos": 3913
+     },
+     {
+      "step": "not_fork_or_archived",
+      "prs": 6859,
+      "repos": 3802
+     },
+     {
+      "step": "python_share_ge_75",
+      "prs": 4792,
+      "repos": 2689
+     },
+     {
+      "step": "open_license",
+      "prs": 3224,
+      "repos": 1806
+     },
+     {
+      "step": "details_retrieved",
+      "prs": 3224,
+      "repos": 1806
+     },
+     {
+      "step": "merged_into_default_branch",
+      "prs": 3155,
+      "repos": 1760
+     },
+     {
+      "step": "one_closing_issue_same_repo",
+      "prs": 2910,
+      "repos": 1639
+     },
+     {
+      "step": "issue_closed",
+      "prs": 2905,
+      "repos": 1636
+     },
+     {
+      "step": "issue_text_gt_10_chars",
+      "prs": 2870,
+      "repos": 1609
+     },
+     {
+      "step": "files_1_to_15",
+      "prs": 2489,
+      "repos": 1383
+     },
+     {
+      "step": "touches_tests",
+      "prs": 1852,
+      "repos": 1055
+     },
+     {
+      "step": "touches_non_test_python",
+      "prs": 1566,
+      "repos": 964
+     }
+    ],
+    "stage1_candidates_in_sample": 1566,
+    "stage1_candidates_in_sample_known_buildable": 60,
+    "estimated_stage1_candidates_in_window": {
+     "estimate": 261457,
+     "ci95": [
+      209700,
+      314550
+     ]
+    },
+    "estimated_stage1_candidates_outside_known_buildable": {
+     "estimate": 251439,
+     "ci95": [
+      202687,
+      309374
+     ]
+    },
+    "estimated_stage1_candidates_outside_known_buildable_ge_100_stars": {
+     "estimate": 37733,
+     "ci95": [
+      28216,
+      48084
+     ]
+    },
+    "candidates_by_star_band": {
+     "10-99": 335,
+     "100-999": 126,
+     "<10": 949,
+     ">=1000": 156
+    },
+    "stage1_candidates_env_class": {
+     "A_known_buildable": 60,
+     "B_standard_packaging": 1243,
+     "C_packaging_with_native_build": 37,
+     "D_no_root_packaging": 226
+    }
+   },
+   "W0": {
+    "hours_in_window": 983,
+    "hours_sampled": 12,
+    "sampled_hour_starts_utc": [
+     "2026-04-09T09:00:00Z",
+     "2026-04-10T13:00:00Z",
+     "2026-04-10T20:00:00Z",
+     "2026-04-12T21:00:00Z",
+     "2026-04-18T09:00:00Z",
+     "2026-04-22T16:00:00Z",
+     "2026-04-23T02:00:00Z",
+     "2026-05-02T02:00:00Z",
+     "2026-05-03T17:00:00Z",
+     "2026-05-06T16:00:00Z",
+     "2026-05-09T17:00:00Z",
+     "2026-05-10T09:00:00Z"
+    ],
+    "prs_in_sampled_hours": 1970,
+    "funnel": [
+     {
+      "step": "merged, issue-linked PRs returned by search",
+      "prs": 1970,
+      "repos": 1249
+     },
+     {
+      "step": "repository_resolves",
+      "prs": 1970,
+      "repos": 1249
+     },
+     {
+      "step": "outside_development_repos",
+      "prs": 1970,
+      "repos": 1249
+     },
+     {
+      "step": "outside_training_pool",
+      "prs": 1947,
+      "repos": 1230
+     },
+     {
+      "step": "not_fork_or_archived",
+      "prs": 1856,
+      "repos": 1181
+     },
+     {
+      "step": "python_share_ge_75",
+      "prs": 1358,
+      "repos": 858
+     },
+     {
+      "step": "open_license",
+      "prs": 901,
+      "repos": 581
+     },
+     {
+      "step": "details_retrieved",
+      "prs": 901,
+      "repos": 581
+     },
+     {
+      "step": "merged_into_default_branch",
+      "prs": 870,
+      "repos": 557
+     },
+     {
+      "step": "one_closing_issue_same_repo",
+      "prs": 792,
+      "repos": 518
+     },
+     {
+      "step": "issue_closed",
+      "prs": 792,
+      "repos": 518
+     },
+     {
+      "step": "issue_text_gt_10_chars",
+      "prs": 760,
+      "repos": 499
+     },
+     {
+      "step": "files_1_to_15",
+      "prs": 677,
+      "repos": 440
+     },
+     {
+      "step": "touches_tests",
+      "prs": 420,
+      "repos": 281
+     },
+     {
+      "step": "touches_non_test_python",
+      "prs": 372,
+      "repos": 255
+     }
+    ],
+    "stage1_candidates_in_sample": 372,
+    "stage1_candidates_in_sample_known_buildable": 38,
+    "estimated_stage1_candidates_in_window": {
+     "estimate": 30473,
+     "ci95": [
+      26295,
+      34487
+     ]
+    },
+    "estimated_stage1_candidates_outside_known_buildable": {
+     "estimate": 27360,
+     "ci95": [
+      23838,
+      30964
+     ]
+    },
+    "estimated_stage1_candidates_outside_known_buildable_ge_100_stars": {
+     "estimate": 5898,
+     "ci95": [
+      4260,
+      7700
+     ]
+    },
+    "candidates_by_star_band": {
+     "10-99": 63,
+     "100-999": 43,
+     "<10": 199,
+     ">=1000": 67
+    }
+   }
+  },
+  "known_buildable_universe": {
+   "window_utc": [
+    "2026-05-13T00:00:00Z",
+    "2026-10-26T23:59:59Z"
+   ],
+   "repos_in_universe": 3709,
+   "eligible_repos_searched": 3344,
+   "funnel": [
+    {
+     "step": "merged, issue-linked PRs returned by search",
+     "prs": 26893,
+     "repos": 947
+    },
+    {
+     "step": "repository_resolves",
+     "prs": 26893,
+     "repos": 947
+    },
+    {
+     "step": "outside_development_repos",
+     "prs": 26893,
+     "repos": 947
+    },
+    {
+     "step": "outside_training_pool",
+     "prs": 26893,
+     "repos": 947
+    },
+    {
+     "step": "not_fork_or_archived",
+     "prs": 26877,
+     "repos": 942
+    },
+    {
+     "step": "python_share_ge_75",
+     "prs": 22411,
+     "repos": 839
+    },
+    {
+     "step": "open_license",
+     "prs": 21169,
+     "repos": 733
+    },
+    {
+     "step": "details_retrieved",
+     "prs": 21169,
+     "repos": 733
+    },
+    {
+     "step": "merged_into_default_branch",
+     "prs": 20829,
+     "repos": 721
+    },
+    {
+     "step": "one_closing_issue_same_repo",
+     "prs": 19693,
+     "repos": 711
+    },
+    {
+     "step": "issue_closed",
+     "prs": 19626,
+     "repos": 710
+    },
+    {
+     "step": "issue_text_gt_10_chars",
+     "prs": 19485,
+     "repos": 706
+    },
+    {
+     "step": "files_1_to_15",
+     "prs": 18424,
+     "repos": 691
+    },
+    {
+     "step": "touches_tests",
+     "prs": 14564,
+     "repos": 609
+    },
+    {
+     "step": "touches_non_test_python",
+     "prs": 12913,
+     "repos": 598
+    }
+   ],
+   "stage1_candidates": 12913,
+   "stage1_candidate_repos": 598,
+   "issue_also_created_after_release": 11217,
+   "benchmark_subset_shape": 9014,
+   "by_month": {
+    "2026-05": 1311,
+    "2026-06": 2084,
+    "2026-07": 2106,
+    "2026-08": 2202,
+    "2026-09": 2367,
+    "2026-10": 2843
+   },
+   "max_per_repo": 1141,
+   "top_repos": [
+    [
+     "MervinPraison/PraisonAI",
+     1141
+    ],
+    [
+     "home-assistant/core",
+     1030
+    ],
+    [
+     "kornia/kornia",
+     671
+    ],
+    [
+     "xarray-contrib/xarray-spatial",
+     584
+    ],
+    [
+     "nesquena/hermes-webui",
+     461
+    ],
+    [
+     "raullenchai/Rapid-MLX",
+     372
+    ],
+    [
+     "apache/airflow",
+     324
+    ],
+    [
+     "earthobservations/wetterdienst",
+     260
+    ],
+    [
+     "docling-project/docling",
+     239
+    ],
+    [
+     "proteanhq/protean",
+     205
+    ]
+   ],
+   "repos_by_candidate_count": {
+    "1": 157,
+    "10-49": 135,
+    "2-9": 261,
+    "50+": 45
+   },
+   "candidates_by_star_band": {
+    "100-999": 2469,
+    "<100": 1111,
+    ">=1000": 9333
+   },
+   "licenses": {
+    "MIT": 5695,
+    "Apache-2.0": 4916,
+    "BSD-3-Clause": 1146,
+    "NOASSERTION": 372,
+    "BSD-2-Clause": 208,
+    "AGPL-3.0": 182,
+    "GPL-3.0": 178,
+    "GPL-2.0": 113,
+    "MIT-0": 72,
+    "LGPL-3.0": 20,
+    "MPL-2.0": 8,
+    "UPL-1.0": 2,
+    "ISC": 1
+   }
+  },
+  "calibration": {
+   "window_utc": [
+    "2026-04-02T00:00:00Z",
+    "2026-05-12T23:59:59Z"
+   ],
+   "published_post_release_python_tasks": 62,
+   "published_tasks_in_prior_known_buildable_eligible_repos": 41,
+   "published_base_prs_in_those_repos": 41,
+   "our_stage1_candidates_in_those_repos": 2059,
+   "published_base_prs_found_by_our_search": 38,
+   "published_base_prs_passing_our_stage1_filters": 37,
+   "published_per_stage1_candidate": 0.018,
+   "published_per_stage1_candidate_ci95_wilson": [
+    0.0131,
+    0.0247
+   ],
+   "all_published_in_those_repos_per_stage1_candidate": 0.0199,
+   "funnel": [
+    {
+     "step": "merged, issue-linked PRs returned by search",
+     "prs": 4636,
+     "repos": 516
+    },
+    {
+     "step": "repository_resolves",
+     "prs": 4636,
+     "repos": 516
+    },
+    {
+     "step": "outside_development_repos",
+     "prs": 4636,
+     "repos": 516
+    },
+    {
+     "step": "outside_training_pool",
+     "prs": 4636,
+     "repos": 516
+    },
+    {
+     "step": "not_fork_or_archived",
+     "prs": 4632,
+     "repos": 513
+    },
+    {
+     "step": "python_share_ge_75",
+     "prs": 3932,
+     "repos": 457
+    },
+    {
+     "step": "open_license",
+     "prs": 3709,
+     "repos": 408
+    },
+    {
+     "step": "details_retrieved",
+     "prs": 3709,
+     "repos": 408
+    },
+    {
+     "step": "merged_into_default_branch",
+     "prs": 3608,
+     "repos": 399
+    },
+    {
+     "step": "one_closing_issue_same_repo",
+     "prs": 3383,
+     "repos": 388
+    },
+    {
+     "step": "issue_closed",
+     "prs": 3367,
+     "repos": 386
+    },
+    {
+     "step": "issue_text_gt_10_chars",
+     "prs": 3307,
+     "repos": 384
+    },
+    {
+     "step": "files_1_to_15",
+     "prs": 3101,
+     "repos": 373
+    },
+    {
+     "step": "touches_tests",
+     "prs": 2227,
+     "repos": 314
+    },
+    {
+     "step": "touches_non_test_python",
+     "prs": 2059,
+     "repos": 300
+    }
+   ],
+   "note": "The published monthly set is a curated subset (appendix-H filters, including an LLM difficulty label), so this rate is a lower bound on what the full pipeline produces."
+  },
+  "projection": {
+   "expected_usable_from_published_62": 54.5,
+   "new_usable_tasks_needed": {
+    "200": 146,
+    "250": 196
+   },
+   "gold_revalidation_keep_rate": 0.8783,
+   "known_buildable_stage1_candidates": 12913,
+   "known_buildable_stage1_candidates_capped": {
+    "cap_per_repo": 10,
+    "candidates": 2997
+   },
+   "scenarios_known_buildable_only": [
+    {
+     "yield": "calibrated on the published window (curated subset; lower bound)",
+     "rate": 0.018,
+     "expected_usable": 204,
+     "expected_usable_ci95": [
+      149,
+      280
+     ],
+     "expected_usable_capped": 88,
+     "capped_note": "uses the rate measured on capped calibration candidates; the cap binds less over the 41-day calibration window than over the 167-day mining window, so this is rough"
+    },
+    {
+     "yield": "SWE-rebench full pipeline (21,336 / 153,400)",
+     "rate": 0.1391,
+     "expected_usable": 1577,
+     "expected_usable_capped": 366
+    }
+   ],
+   "cap_sensitivity_candidates": {
+    "10": 2997,
+    "20": 4343,
+    "50": 6401
+   },
+   "conversion_rate_needed_under_cap": {
+    "10": {
+     "200": 0.0555,
+     "250": 0.0745
+    },
+    "20": {
+     "200": 0.0383,
+     "250": 0.0514
+    },
+    "50": {
+     "200": 0.026,
+     "250": 0.0349
+    }
+   },
+   "calibration_window_capped": {
+    "cap_per_repo": 10,
+    "capped_candidates": 1113,
+    "published_per_capped_candidate": 0.0332,
+    "max_published_per_repo": 3
+   },
+   "conversion_rate_needed_known_buildable_only": {
+    "200": 0.0129,
+    "250": 0.0173
+   },
+   "outside_known_buildable_stage1_estimate": {
+    "estimate": 251439,
+    "ci95": [
+     202687,
+     309374
+    ]
+   },
+   "caveat": "Planning estimates, not measurements. Real counts exist only after environments are built and gold patches are validated."
+  }
+ },
+ "tier_b": {
+  "window_utc": [
+   "2025-02-01T00:00:00Z",
+   "2026-04-02T00:00:00Z"
+  ],
+  "funnel": [
+   {
+    "step": "published rows created 2025-02-01 .. 2026-04-01 with an environment",
+    "tasks": 1732,
+    "repos": 513,
+    "by_source": {
+     "swe_bench_live": 801,
+     "swe_rebench_leaderboard": 689,
+     "swe_rebench_v1": 214,
+     "swe_rebench_v2_option_b_repos": 28
+    }
+   },
+   {
+    "step": "repository resolves on GitHub",
+    "tasks": 1732,
+    "repos": 510
+   },
+   {
+    "step": "one row per base pull request (across sources and _interface variants)",
+    "tasks": 1526,
+    "repos": 510
+   },
+   {
+    "step": "outside development repositories",
+    "tasks": 1526,
+    "repos": 510
+   },
+   {
+    "step": "outside training pool (after Option B)",
+    "tasks": 962,
+    "repos": 352
+   },
+   {
+    "step": "open repository license",
+    "tasks": 806,
+    "repos": 311,
+    "by_source": {
+     "swe_bench_live": 382,
+     "swe_rebench_leaderboard": 380,
+     "swe_rebench_v2_option_b_repos": 24,
+     "swe_rebench_v1": 20
+    }
+   }
+  ],
+  "by_month": {
+   "2025-02": 100,
+   "2025-03": 86,
+   "2025-04": 79,
+   "2025-05": 78,
+   "2025-06": 73,
+   "2025-07": 83,
+   "2025-08": 106,
+   "2025-09": 36,
+   "2025-10": 25,
+   "2025-11": 27,
+   "2025-12": 35,
+   "2026-01": 20,
+   "2026-02": 30,
+   "2026-03": 28
+  },
+  "max_per_repo": 65,
+  "capped_per_repo": {
+   "cap": 10,
+   "tasks": 698
+  },
+  "expected_usable_after_gold_validation": 708,
+  "note": "Environment = prebuilt image referenced (SWE-rebench sources) or documented per instance (SWE-bench-Live); tags are checked at build time. Tier B is never reported as post-release."
+ },
+ "github_requests": {
+  "cache_hits": 1997,
+  "search_windows": 264
+ }
+}
