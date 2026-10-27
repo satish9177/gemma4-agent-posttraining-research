@@ -7,7 +7,7 @@ This is an independent research record on Gemma 4 as a repository-level coding a
 - every registered verdict, including null, negative and invalid runs;
 - the plan for a seeded post-training study that follows from them.
 
-Author: Satish Kommanaboina, independent researcher. Status: preliminary study complete (E9 has run but is not yet analysed); the post-training study is planned.
+Author: Satish Kommanaboina, independent researcher. Status: preliminary study complete (E3–E9); the post-training study is planned.
 
 ---
 
@@ -26,7 +26,7 @@ The full design is in [RESEARCH_PLAN.md](RESEARCH_PLAN.md).
 
 ## 3. Preliminary findings
 
-All runs used Gemma 4 31B (QAT W4A16) served by vLLM on 4× NVIDIA L4, on a fixed 48-task development panel of Python repository issues. Every experiment was preregistered and hash-frozen before its GPU run. Numbers below are the registered results. They are **not** evidence of statistical significance unless stated, and none is.
+All runs used Gemma 4 31B (QAT W4A16) served by vLLM on 4× NVIDIA L4. Paired experiments used a fixed 48-task development panel of Python repository issues; pilots used smaller task sets. Every experiment was preregistered and hash-frozen before its GPU run. Numbers below are the registered results. They are **not** evidence of statistical significance unless stated, and none is.
 
 | Finding | Evidence | Caveat |
 |---|---|---|
@@ -34,6 +34,7 @@ All runs used Gemma 4 31B (QAT W4A16) served by vLLM on 4× NVIDIA L4, on a fixe
 | **Fixing the tool protocol removed errors, but not competence failures.** Read-serialization guidance cut corrupted tool calls from 19.6% to 6.4%; solves went 12 → 15/48, registered *CONFIRMED* at exactly the +3 threshold. A second protocol change eliminated edit-argument corruption (83 calls → 0), yet solves stayed at 13 vs 14 (*TIE*). The remaining failures were wrong localization and wrong fixes. | [E3](experiments/e3/RESULTS.md), [E4](experiments/e4/RESULTS.md) | Thinking off; one 48-task panel |
 | **A strong inference-only baseline exists.** Reproducing a public thinking-on configuration solved **19/48**. | [E7](experiments/e7/RESULTS.md) | Registered verdict *NOT PROMISING*. Its criterion was later found to be flawed; the verdict is kept unchanged. |
 | **The tool-budget effect is small and not significant.** Paired 28 vs 36 tool calls: **21/48 → 24/48**. Three tasks were solved only by the 36-call arm and none only by the 28-call arm; exact McNemar **p ≈ 0.25**. Registered verdicts: competitive **WIN**; mechanism (budget relief) **NOT CONFIRMED**. | [E8](experiments/e8/RESULTS.md) | Not significant. An external run of the 36-call setting later exceeded its aggregate runtime budget twice. |
+| **A shorter time cap did not cut off useful work, but left more empty patches.** At 32 calls, 7 vs 8 minutes on an 8-task stress panel: no solve and no useful action needed minute 8, and whenever the late-call region (calls 28–32) was reached, it was reached before minute 6. The 7-minute arm ended with an empty patch on 4 tasks (0 in the 8-minute arm), so the registered decision is *MIXED*. | [E9](experiments/e9/RESULTS.md) | Stress-selected 8-task pilot, one run per arm; solves (2 vs 3) are not a criterion. |
 | **Run-to-run noise is measured.** Byte-identical configurations flipped **2–4 of 48** tasks between runs, and solved counts moved by up to 2. | [results/](results/README.md) | Differences of about 3 tasks or fewer on 48 tasks are within noise. |
 
 **The narrative these results support.**
@@ -59,7 +60,12 @@ Details: [docs/methodology.md](docs/methodology.md).
 ## 5. Next research phase (planned, not yet run)
 
 1. **Phase 0 — adapter train/serve audit.** Does vLLM runtime LoRA apply the adapter we trained? It compares a Hugging Face reference, runtime LoRA and merged weights. See [phase0/adapter-serving-audit](phase0/adapter-serving-audit/README.md). *Planned; no result yet.*
-2. **Fresh evaluation set.** Python tasks created after Gemma 4's release (2 Apr 2026), from repositories disjoint from training, with gold patches validated twice. **Feasibility check:** only 62 such tasks are published (47 repo-disjoint, about 41 expected to validate), far below the ~300 planned. The test set is being redesigned (task mining, training-pool exclusions, or a separately reported post-cutoff tier) **without relaxing the post-release date**. See [analysis/post_release_task_inventory.md](analysis/post_release_task_inventory.md).
+2. **Two evaluation tiers, reported separately.**
+   - **Tier A (primary):** Python tasks created on or after Gemma 4's release (2 Apr 2026), from repositories absent from training, with gold patches validated twice. Only 62 such tasks are published, so Tier A combines them with new tasks mined from pull requests created after 12 May 2026. The target is at least 200 gold-valid tasks; the realized size is frozen before training, and the post-release date is never relaxed to reach it.
+   - **Tier B (secondary):** tasks created after the January 2025 pretraining cutoff but before release. It is reported separately and never called post-release, because later post-training exposure cannot be excluded.
+   - To keep all 62 published post-release tasks, the 14 repositories they share with the training pool are removed from training (−317 of 7,243 tasks).
+   - **Feasibility (27 Oct 2026, counts only):** 12,913 candidate pull requests pass the filters in repositories with a known working environment. Whether at least 200 become gold-valid tasks depends on a conversion rate that only building and validating them can measure. It needs about 1.3% with no per-repository cap and about 5.6% with a cap of 10; in the published window, a curated public task set included 1.8% of comparable candidates. A CPU-only pilot measures the rate before anything is frozen.
+   - See [analysis/post_release_task_inventory.md](analysis/post_release_task_inventory.md) and [analysis/post_release_mining_plan.md](analysis/post_release_mining_plan.md).
 3. **RQ1: scaling.** 12B LoRA SFT on 200 / 400 / 800 / 1,600 execution-verified Gemma 4 31B trajectories from the same scaffold, as nested subsets, with 3 training seeds each.
 4. **RQ2: reasoning retention.** Native thoughts kept vs stripped from the training targets, with inference always thinking.
 5. **RQ3: data source.** Same-scaffold trajectories vs public trajectories from a stronger open teacher, converted to the same tool format, on the same tasks.
@@ -74,7 +80,7 @@ Details: [docs/methodology.md](docs/methodology.md).
 | [TECHNICAL_NOTE.md](TECHNICAL_NOTE.md) | What the preregistered experiments taught us about Gemma 4 as a coding agent |
 | [experiments/](experiments/README.md) | One folder per experiment (E3–E9): sanitized preregistration, results, metadata |
 | [results/](results/README.md) | Aggregate results and anonymized per-task outcomes |
-| [analysis/](analysis/) | Statistics verification script; post-release task inventory |
+| [analysis/](analysis/) | Statistics verification script; post-release task inventory; mining-feasibility stage and candidate inventories for both tiers |
 | [phase0/adapter-serving-audit/](phase0/adapter-serving-audit/README.md) | Preregistration and metrics for the planned train/serve audit |
 | [scripts/](scripts/) | Generic tooling (SHA-256 freeze manifests) |
 | [docs/methodology.md](docs/methodology.md) | How experiments are designed, frozen, validated and reported |
@@ -93,6 +99,6 @@ Some preliminary evaluations used benchmark assets whose terms restrict redistri
 - anonymized per-task outcomes;
 - new, generic analysis code.
 
-Details are in [DATA_AND_LICENSING.md](DATA_AND_LICENSING.md). The future study uses only openly licensed task sources (CC-BY-4.0 or MIT), so its data and traces can be released.
+Details are in [DATA_AND_LICENSING.md](DATA_AND_LICENSING.md). The future study uses only openly licensed task sources: published datasets under CC-BY-4.0 or MIT, and tasks mined from public repositories under OSI-approved licenses. Its data and traces can therefore be released.
 
 Code: Apache-2.0 ([LICENSE](LICENSE)). Documentation and result tables: CC BY 4.0. Citation: [CITATION.cff](CITATION.cff).

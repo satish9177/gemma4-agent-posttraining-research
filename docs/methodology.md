@@ -59,7 +59,7 @@ A run stopped by an infrastructure limit before writing its status is **INFRASTR
 
 ## 6. Noise awareness
 
-Byte-identical configurations flip 2–4 of 48 tasks between runs (see [results/](../results/README.md)). Preregistered thresholds were therefore set at a Δ of ±3 tasks, and smaller movements are reported as ties. The planned study responds by using about 300 test tasks, 3 training seeds and paired randomization tests.
+Byte-identical configurations flip 2–4 of 48 tasks between runs (see [results/](../results/README.md)). Preregistered thresholds were therefore set at a Δ of ±3 tasks, and smaller movements are reported as ties. The planned study responds with a primary post-release test tier that targets at least 200 gold-valid tasks (its realized size frozen before training, with power recomputed from it), a separately reported secondary tier, 3 training seeds and paired randomization tests.
 
 ## 7. Inspection of discordant tasks
 

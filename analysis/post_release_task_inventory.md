@@ -3,6 +3,14 @@
 Produced by `analysis/post_release_inventory.py`. All numbers come from
 `analysis/post_release_inventory.json` (run 2026-10-27, pinned dataset revisions).
 
+> **Update, 27 Oct 2026 (design decision taken after this report, before any training or evaluation).**
+> Option B below was adopted: the 14 overlapping repositories are removed from the *training* pool, so all
+> 62 published candidates stay available for the primary post-release tier (Tier A). The ~300-task target
+> was replaced by a two-tier design: Tier A targets at least 200 gold-valid tasks, topped up by mining
+> post-12-May-2026 pull requests, and a separately reported Tier B covers tasks created between the
+> January 2025 pretraining cutoff and the release. See
+> [post_release_mining_plan.md](post_release_mining_plan.md). The analysis below is unchanged.
+
 ## Question
 
 Are there enough Python repository-issue tasks **created on or after 2026-04-02T00:00:00Z**

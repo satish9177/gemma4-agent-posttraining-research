@@ -32,4 +32,4 @@ If the terms later allow it, the withheld originals and traces will be added, an
 
 ## Future data
 
-The planned study ([RESEARCH_PLAN.md](RESEARCH_PLAN.md)) uses only openly licensed task sources: SWE-rebench (CC-BY-4.0) and SWE-bench-Live (MIT). Its task lists, trajectories, adapters and per-task results are intended for full release, subject to those licenses and the Gemma terms.
+The planned study ([RESEARCH_PLAN.md](RESEARCH_PLAN.md)) uses only openly licensed task sources: SWE-rebench (CC-BY-4.0), SWE-bench-Live (MIT), and tasks mined from public GitHub repositories under OSI-approved or public-domain licenses ([analysis/post_release_mining_plan.md](analysis/post_release_mining_plan.md)). Mined tasks keep their repository's license and attribution. The candidate inventories in `analysis/` list only public pull-request and dataset identifiers, dates, counts and license identifiers; they contain no issue text or patches. The study's task lists, trajectories, adapters and per-task results are intended for full release, subject to those licenses and the Gemma terms.

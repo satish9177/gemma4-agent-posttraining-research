@@ -12,7 +12,9 @@
 
 The study measures the SFT data-scaling curve for Gemma 4 12B as a native-tool-calling, thinking-on repository agent:
 - **Training data:** 200 to 1,600 execution-verified trajectories from a Gemma 4 31B teacher, recorded in exactly the scaffold used at test time.
-- **Test set:** Python issues created after Gemma 4's release, from repositories unseen in training. The target was about 300, but a feasibility check found far fewer published candidates (§4.2), so the test-set design is being revised.
+- **Evaluation, in two tiers that are never pooled (§4.2):**
+  - **Tier A (primary):** Python issues created on or after Gemma 4's release (2 Apr 2026), from repositories absent from training. Target: at least 200 gold-valid tasks. The realized size is frozen before training.
+  - **Tier B (secondary):** tasks created after the January 2025 pretraining cutoff but before release, reported separately and never called post-release.
 - **Seeds:** 3 training seeds per data size.
 
 At a fixed size, two ablations ask:
@@ -40,7 +42,7 @@ A Phase 0 audit first verifies that the served adapter is the trained adapter. A
 
 ## 3. Research questions and hypotheses
 
-**RQ1 (primary): verified-trajectory scaling.** How many same-scaffold, execution-verified 31B-teacher trajectories does LoRA SFT need before Gemma 4 12B resolves more unseen, post-release Python issues than the untrained 12B in the same scaffold?
+**RQ1 (primary): verified-trajectory scaling.** How many same-scaffold, execution-verified 31B-teacher trajectories does LoRA SFT need before Gemma 4 12B resolves more unseen, post-release Python issues (Tier A) than the untrained 12B in the same scaffold?
 - **H1a [HYPOTHESIS]:** at N = 200, SFT is no better than the untrained model.
 - **H1b [HYPOTHESIS]:** some N ≤ 1,600 gives a Holm-significant gain, and the gain at 1,600 is at least the gain at 800.
 - **Falsification:** any of these outcomes is informative and will be published.
@@ -71,26 +73,42 @@ One fixed, open re-implementation of a native Gemma 4 function-calling agent is 
 - **Sampling:** Gemma defaults (T 1.0, top-p 0.95, top-k 64).
 - **Task environments:** each task runs in its own Docker image.
 
-### 4.2 Data and splits
+### 4.2 Data, splits and evaluation tiers
 
-All splits are Python-only, repo-disjoint, and frozen with hashes before any training.
+All splits are Python-only and frozen with SHA-256 manifests before any training. **No task is selected using any model's performance.**
 
-| Split | Source | Size | Use |
-|---|---|---|---|
-| Test | Tasks created **on or after 2 Apr 2026** (Gemma 4 release; pretraining cutoff Jan 2025), from SWE-rebench monthly splits (CC-BY-4.0), topped up from SWE-bench-Live (MIT) if needed | target 300, minimum 200 | Primary evaluation only |
-| Validation | Same sources, repo-disjoint from test | 100 | LR pilot and smoke checks only |
-| Training pool | SWE-rebench-V2 Python tasks with Docker images (CC-BY-4.0) | about 4,000 | Teacher trajectory generation |
+**Decisions fixed on 27 Oct 2026, before any training or evaluation, from published counts only:**
+1. **Remove the overlapping repositories from training, not from the test pool.** 14 repositories have published post-release tasks and also appear in the SWE-rebench-V2 Python pool. They are removed from every training use: teacher trajectory generation, the converted public trajectories of arm C, the LR pilot and validation. This costs 317 of 7,243 V2 Python tasks (4.4%); training repositories go from 690 to 676. In exchange, all 62 published post-release candidates stay available for Tier A ([inventory](analysis/post_release_task_inventory.md), option B).
+2. **Exclude the development repositories from both tiers.** FastAPI, Rich, Requests and HTTPX were the repositories of the preliminary development pool, on which the scaffold and prompts were tuned.
+3. **Evaluate in two tiers and report them separately.** Tier B is never merged into Tier A to form a larger primary benchmark.
 
-- **Gold validation:** the gold patch must pass the fail-to-pass and pass-to-pass tests **twice**, and the empty patch must fail. Flaky tasks are dropped. Exclusions happen before freezing, never after.
-- **Date criterion:** fixed. If fewer than 200 valid tasks exist, the set is not padded with older tasks; the shortfall is reported.
-- **Feasibility check (27 Oct 2026): the target is NOT reachable from published data.** Only **62** Python tasks created on or after 2 Apr 2026 have a published Docker image and an open license. That drops to **47** after removing repositories that also appear in the training pool, and to an estimated **~41** after gold validation (rough prior: 88% survival). Published post-release data currently stop at 12 May 2026. Details: [analysis/post_release_task_inventory.md](analysis/post_release_task_inventory.md).
-- **The date criterion is not relaxed to reach a target.** Before any training, the test set will be redesigned and frozen using one or more of these options, each disclosed:
-  1. mine additional post-release tasks with the open SWE-rebench collection pipeline, from repositories disjoint from training;
-  2. remove the 14 overlapping repositories from the *training* pool instead (−317 of 7,243 tasks), keeping all 62 post-release tasks for testing;
-  3. add a clearly separated, larger *secondary* tier of tasks created after the January 2025 pretraining cutoff but before release, reported apart from the post-release tier because post-training contamination cannot be excluded;
-  4. wait for further monthly releases.
+| Split | Tasks created | Sources | Size | Use |
+|---|---|---|---|---|
+| **Tier A (primary)** | on or after 2 Apr 2026 (Gemma 4 release) | the 62 published post-release SWE-rebench candidates, plus tasks mined with open tooling from pull requests created from 13 May 2026 (after published coverage ends) up to the mining date | target **≥ 200** gold-valid, preferably about 250; realized N frozen before training | All primary analyses |
+| **Tier B (secondary)** | 1 Feb 2025 to 1 Apr 2026: after the January 2025 pretraining cutoff, before release | published SWE-rebench sets (CC-BY-4.0) and SWE-bench-Live (MIT) | whatever passes the same criteria: 806 candidates in 311 repositories, about 708 expected after validation | Secondary, separately reported robustness analyses |
+| Validation | any | SWE-rebench-V2 Python tasks from held-out repositories, which are then removed from training | 100 | LR pilot, smoke checks and the Phase 0 downstream check only |
+| Training pool | any | SWE-rebench-V2 Python tasks with Docker images (CC-BY-4.0), minus the 14 repositories above and the validation repositories | 6,926 tasks in 676 repositories before the validation hold-out | Teacher trajectory generation |
 
-  The power figures in §5 assume about 300 tasks and will be recomputed for the final design.
+**Tier A criteria (all required):**
+- pull request created on or after 2026-04-02T00:00Z. The issue may be older; the subset whose issue is also post-release is reported as a sensitivity analysis;
+- Python repository (at least 75% Python, the SWE-rebench rule) under an OSI-approved or public-domain license;
+- a reproducible Docker environment with a working test command;
+- repository absent from the training pool (after decision 1) and not a development repository;
+- gold patch passes the fail-to-pass and pass-to-pass tests **twice**; the empty patch fails the fail-to-pass tests; flaky tests are removed, and a task with no stable fail-to-pass test is dropped;
+- tests need no network, GPU or special hardware.
+
+Mined tasks must also pass SWE-rebench's deterministic candidate filters: merged into the default branch; exactly one linked issue, in the same repository, closed, with more than 10 characters of description; 1–15 files changed; both tests and non-test Python code modified. SWE-rebench's LLM-assessed difficulty filter is **not** applied, because it is a model judgement. The 62 published tasks did pass that filter, so Tier A results are also broken down by source (published vs mined) as a descriptive check. The full mining rules are in [analysis/post_release_mining_plan.md](analysis/post_release_mining_plan.md). They are frozen, with hashes, before any model sees a Tier A task.
+
+**Tier B criteria:** the same, except for the creation window. **Caveat, stated wherever Tier B results appear:** tasks created after the published pretraining cutoff are likely outside base pretraining, but possible later post-training exposure cannot be excluded. Tier B tasks in training-pool repositories are dropped; Tier B never causes further removals from training.
+
+**Size rules:**
+- The primary post-release set targets at least 200 gold-valid tasks. Its realized size will be frozen before training, and power and minimum-detectable-effect calculations will be recomputed from the realized N. **The date criterion will not be weakened to meet a desired sample size.**
+- If Tier A ends up below 200, it is reported at its realized N with the recomputed power. Tier B does not substitute for it.
+- A per-repository cap, fixed in the frozen mining specification, limits the influence of any single repository. Tasks above the cap are dropped by seeded random selection.
+
+**Mining-feasibility stage (CPU and network only; runs before any training).** It enumerates eligible post-12-May pull requests, records licenses and every filter's attrition, estimates environment-build feasibility, counts repo-disjoint candidates and writes a reproducible candidate inventory. It uses no model. The first pass was run on 27 Oct 2026; its results, and what they do and do not establish, are in [analysis/post_release_mining_plan.md](analysis/post_release_mining_plan.md).
+
+**Feasibility (27 Oct 2026, counts only):** 12,913 candidate pull requests pass the filters in repositories with a known working environment. Whether at least 200 become gold-valid tasks depends on a conversion rate that only building and validating them can measure. It needs about 1.3% with no per-repository cap and about 5.6% with a cap of 10; in the published window, a curated public task set included 1.8% of comparable candidates. A CPU-only pilot measures the rate before anything is frozen.
 
 ### 4.3 Trajectory generation
 
@@ -103,7 +121,7 @@ All splits are Python-only, repo-disjoint, and frozen with hashes before any tra
 
   Malformed tool-call turns inside accepted trajectories stay in context but are masked from the loss.
 - **Subsets:** nested, 200 ⊂ 400 ⊂ 800 ⊂ 1,600, drawn with one fixed data seed and stratified by repository.
-- **Ablation set:** the RQ2/RQ3 arms share one 800-task set, chosen from tasks that also have a converted public trajectory. The N = 800 scaling subset reuses it if the overlap allows. This rule is fixed in advance.
+- **Ablation set:** the RQ2/RQ3 arms share one 800-task set, chosen from training-pool tasks (after the §4.2 exclusions) that also have a converted public trajectory. The N = 800 scaling subset reuses it if the overlap allows. This rule is fixed in advance.
 
 ### 4.4 Training
 
@@ -131,7 +149,7 @@ Preregistration: [phase0/adapter-serving-audit/PREREGISTRATION.md](phase0/adapte
 
 ## 5. Evaluation and statistics
 
-- **Primary metric:** resolved rate on the frozen test set.
+- **Primary metric:** resolved rate on the frozen Tier A set.
 - **Primary analysis:** paired by task. For each N:
   - d_q = (mean over 3 SFT seeds of solved_q) − (mean over 3 untrained samples of solved_q);
   - exact sign-flip randomization test on the mean of d_q;
@@ -139,9 +157,8 @@ Preregistration: [phase0/adapter-serving-audit/PREREGISTRATION.md](phase0/adapte
   - Holm correction across the four N.
 - **Secondary analysis:** R vs S and S vs C with the same procedure, Holm across the two. Per-seed exact McNemar tests are reported descriptively.
 - **Definition:** N* is the smallest N with a Holm-adjusted significant gain.
-- **Power [INFERENCE], by simulation** with heterogeneous per-task difficulty and seed-specific noise:
-  - with 300 tasks and 3 vs 3: about 80% at +5–6 points (α = 0.0125), and ≥ 90% at +7, CyberForge's 12B gain;
-  - with 200 tasks: about 80% at roughly +7.
+- **Tier B:** the same analyses, reported separately as secondary results with the Tier B caveat. Tier B can add statistical precision, but it never enters a primary test and is never pooled with Tier A.
+- **Power.** The primary post-release set targets at least 200 gold-valid tasks. Its realized size will be frozen before training, and power and minimum-detectable-effect calculations will be recomputed from the realized N and published with the frozen plan. They will use a simulation with heterogeneous per-task difficulty and seed-specific noise. The date criterion will not be weakened to meet a desired sample size. *(Earlier power figures assumed about 300 test tasks; they are withdrawn.)*
 - **Secondary metrics:** thinking-active share; malformed-call rate; edit-then-verify rate; no-edit and no-submit rates; tokens per task; trajectory length.
 - **Capability retention:** a LiveCodeBench subset and IFEval for untrained 12B against key checkpoints.
 - **Reference:** untrained 31B with 2 samples per task.
@@ -153,7 +170,8 @@ Preregistration: [phase0/adapter-serving-audit/PREREGISTRATION.md](phase0/adapte
 |---|---|
 | Phase 0 agreement below the gate | Evaluate merged weights only; publish the shortfall |
 | Teacher yield < 15% per attempt after 1,000 attempts | Cap the top N at 800; test set and analysis unchanged |
-| Fewer valid post-release test tasks than planned (already the case; see §4.2) | Redesign per §4.2 options before training and report the power; never relax the post-release date or repo-disjointness for the primary tier |
+| Mining-feasibility stage shows that 200 gold-valid Tier A tasks are not attainable | Decide before training, from counts only, whether to proceed at the realized N; publish the decision and the recomputed power |
+| Tier A below 200 after gold validation | Report Tier A at its realized N with recomputed power; never relax the post-release date, repo-disjointness or validation rules; Tier B stays secondary |
 | Training throughput ≥ 2× worse than planned | Drop the third seed at N = 200 only |
 | No N gives a significant gain | Publish the negative curve with behavioural diagnostics |
 | Damage to general coding ability | Report it as a finding |
@@ -181,7 +199,7 @@ Phase 0 measures the real throughput before the plan proceeds.
 
 | Scope | Contents | H100-hours |
 |---|---|---:|
-| Minimum | N ≤ 800 × 2 seeds; reasoning ablation; ~300-task test (size under revision) | ≈ 250 |
+| Minimum | N ≤ 800 × 2 seeds; reasoning ablation; two-tier test set (sizes frozen before training) | ≈ 250 |
 | **Core** | N ≤ 1,600 × 3 seeds; RQ2 and RQ3 arms; LR pilot; 31B reference | **≈ 580** |
 | Extended | Core, plus 31B LoRA confirmation (2 seeds) and RL-readiness sampling | ≈ 810 |
 
@@ -193,6 +211,8 @@ Phase 0 measures the real throughput before the plan proceeds.
 | Phase 0 audit and calibration | 18 |
 | Contingency | 53 |
 
+**Evaluation sizing [INFERENCE].** The evaluation line was sized for about 300 test tasks. From the planning rates above, evaluating every checkpoint (21 12B evaluations plus 2 31B reference samples per task) costs about 31 H100-hours per 100 test tasks. The final evaluation budget is fixed when the Tier A and Tier B sizes are frozen. Task mining, environment builds and gold validation run on CPUs and are not counted as GPU hours.
+
 Data generation dominates the cost of the knowledge this study produces. Training is many small runs, because seeds are the point. Evaluation is large because 48-task panels proved too noisy.
 
 ## 8. Public outputs
@@ -200,7 +220,7 @@ Data generation dominates the cost of the knowledge this study produces. Trainin
 **Committed, regardless of outcome:**
 - a technical report;
 - code under Apache-2.0: scaffold, training and evaluation configs, statistics, adapter-consistency test suite;
-- split ID lists and hashes;
+- split ID lists and hashes, candidate inventories and the mining code;
 - verified Gemma 4 31B trajectories on openly licensed tasks, subject to the Gemma terms;
 - LoRA adapters;
 - per-task outcomes for every checkpoint;
@@ -212,7 +232,7 @@ Data generation dominates the cost of the knowledge this study produces. Trainin
 
 | Weeks from start | Milestone |
 |---|---|
-| 1–2 | Phase 0 report and test suite; throughput measured; test, validation and training splits frozen |
+| 0–2 (before training) | Tier A mining, environment builds and gold validation (CPU); Phase 0 report and test suite; throughput measured; Tier A, Tier B, validation and training splits frozen |
 | 3–5 | ≥ 1,600 verified trajectories; yield and cost report |
 | 5–8 | 12 scaling runs trained and evaluated; primary analysis run unchanged |
 | 8–10 | R / S / C ablations evaluated; interim write-up |

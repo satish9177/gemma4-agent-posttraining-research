@@ -138,7 +138,12 @@ Per a pre-specified rule there was no third attempt, and the configuration was c
 
 **[INFERENCE]** Local runtime projections did not include the tail behaviour of a different task distribution. A margin of about 10% was not enough.
 
-E9, a paired 8- vs 7-minute cap at 32 calls on a stress panel chosen by a deterministic rule from E8 traces, tests runtime safety directly. **The run completed on 27 October but has not been analysed yet, so no result is reported.**
+**[LOCAL] E9** tested runtime directly: a paired 8- vs 7-minute cap at 32 calls on an 8-task stress panel chosen by a deterministic rule from E8 traces. The run was VALID and the registered decision is **MIXED**.
+- Every condition for preferring 7 minutes passed except "no new failure mode": the 7-minute arm ended with an empty final patch on 4 tasks, the 8-minute arm on none. None of those 4 tasks was solved by the 8-minute arm either.
+- No solve and no useful action needed minute 8. Where the late-call region (calls 28–32) was reached, it was reached before minute 6, so it depended on the call budget, not the clock.
+- Most of the 10.5% panel time saving was run-to-run variation; the cap itself removes at most about 60 s from a long job. A post-hoc what-if on E8's wall times puts a 7-minute cap at about 10.3 h for 120 tasks, still above the 9.5–10.0 h target set after the overruns.
+
+**[INFERENCE]** In this pilot, the late work that mattered tracked the call budget rather than the clock. That is consistent with the planned study's choice of call and token budgets with no wall-clock cap, but an 8-task pilot cannot establish it on its own.
 
 ## 8. Negative and null results, in one place
 
@@ -153,6 +158,7 @@ E9, a paired 8- vs 7-minute cap at 32 calls on a stress panel chosen by a determ
 | E7 | NOT PROMISING (registered; criterion later found flawed) |
 | E8 | Mechanism NOT CONFIRMED |
 | E8 external follow-up | Runtime budget exceeded twice; classified unsafe |
+| E9 runtime pilot | MIXED: no configuration preferred (new empty-patch failure mode in the 7-minute arm) |
 
 These are kept because they constrain the next step as much as the positive results do.
 
@@ -171,7 +177,10 @@ Nobody has published:
 Full design: [RESEARCH_PLAN.md](RESEARCH_PLAN.md).
 
 - **Phase 0 (gate).** Verify that vLLM runtime LoRA reproduces the merged adapter for Gemma 4, and assert target-module counts.
-- **Evaluation.** Python tasks created after Gemma 4's release, from repositories disjoint from training, with gold patches validated twice. A feasibility check found only 62 such published tasks (about 41 expected to validate) against a target of ~300, so this part of the design is being revised. The post-release date is not being relaxed ([inventory](analysis/post_release_task_inventory.md)).
+- **Evaluation, in two separately reported tiers.**
+  - **Tier A (primary):** Python tasks created on or after Gemma 4's release, from repositories absent from training, with gold patches validated twice. Only 62 such tasks are published ([inventory](analysis/post_release_task_inventory.md)). They are kept by removing their 14 shared repositories from training, and topped up by mining pull requests created after 12 May 2026. The target is at least 200 gold-valid tasks. The realized size is frozen before training, power is recomputed from it, and the post-release date is not relaxed ([mining plan](analysis/post_release_mining_plan.md)).
+  - **Tier B (secondary):** tasks created after the January 2025 pretraining cutoff but before release; never called post-release (806 published candidates).
+  - **Feasibility (27 Oct 2026, counts only):** 12,913 candidate pull requests pass the filters in repositories with a known working environment. Whether at least 200 become gold-valid tasks depends on a conversion rate that only building and validating them can measure. It needs about 1.3% with no per-repository cap and about 5.6% with a cap of 10; in the published window, a curated public task set included 1.8% of comparable candidates. A CPU-only pilot measures the rate before anything is frozen.
 - **RQ1.** 12B LoRA SFT on 200 / 400 / 800 / 1,600 verified Gemma 4 31B trajectories from the same scaffold, 3 seeds each.
   - **[HYPOTHESIS]** No gain at 200; a Holm-significant gain at some size ≤ 1,600.
 - **RQ2.** Thoughts kept vs stripped in the training targets, at 800.
@@ -196,5 +205,6 @@ Published here:
 - registered results and verdicts;
 - anonymized per-task outcomes for every valid 48-task run;
 - a standard-library script that recomputes every paired table, McNemar p-value and run-to-run flip count (`python analysis/verify_paired_stats.py`).
+- the test-set inventory and mining-feasibility scripts (`analysis/post_release_inventory.py`, `analysis/post_release_mining_feasibility.py`), which recompute every test-set count from pinned dataset revisions and cached GitHub answers.
 
-Not published: raw traces, task identifiers, prompts and harness-dependent code, because of redistribution terms ([DATA_AND_LICENSING.md](DATA_AND_LICENSING.md)). The proposed study uses openly licensed tasks, so its full traces can be released.
+Not published: raw traces, task identifiers, prompts and harness-dependent code, because of redistribution terms ([DATA_AND_LICENSING.md](DATA_AND_LICENSING.md)). The proposed study uses openly licensed tasks (published datasets under CC-BY-4.0 or MIT, and tasks mined from repositories under OSI-approved licenses), so its full traces can be released.
