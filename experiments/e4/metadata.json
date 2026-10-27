@@ -1,0 +1,55 @@
+{
+  "id": "E4",
+  "name": "Tool-protocol reliability: edit protocol",
+  "status": "completed",
+  "runs": [
+    {
+      "label": "main",
+      "validity": "VALID",
+      "validity_note": "All registered checks V1-V7 passed: 96/96 jobs ended normally, arm-order rule held, 691 health checks with 0 failed attempts, 0 HTTP 5xx responses, mutation log present in both arms with 0 hook errors.",
+      "frozen_utc": "2026-10-21T10:12:41Z",
+      "frozen_utc_note": "freeze of amendment v2 (analysis-code fix); the original preregistration (v1) was frozen 2026-10-21T08:59:44Z. The run was launched 2026-10-21T10:12:51Z.",
+      "completed_utc": "2026-10-21T12:42:42Z",
+      "original_preregistration_sha256": [
+        "efc657b00c98f82f00e3fdef447b65bb0969bedd5a60dcb753a8580425f103c6",
+        "bf162b55683c7181f17d16867ab90fbf46197344f43c789c6ebc299eccc19f67"
+      ],
+      "original_preregistration_files": ["preregistration v1", "amendment v2"],
+      "orchestration": "one inference server for both arms; arm order alternating by task; 2 jobs at a time; health checks and abort on any server failure",
+      "arms": {
+        "CONTROL": {
+          "solved": 13,
+          "n": 48,
+          "description": "the E3 final run's TREATMENT configuration, byte-identical",
+          "mutation_attempts": 154,
+          "failed_mutation_attempts": 85,
+          "missing_old_string_edit_calls": 83,
+          "missing_old_string_edit_tasks": 7
+        },
+        "TREATMENT": {
+          "solved": 14,
+          "n": 48,
+          "description": "CONTROL plus a Safe Editing section appended to the system prompt (edits made through a fixed shell-command template)",
+          "mutation_attempts": 78,
+          "failed_mutation_attempts": 24,
+          "missing_old_string_edit_calls": 0,
+          "missing_old_string_edit_tasks": 0
+        }
+      },
+      "paired": {"both": 10, "control_only": 3, "treatment_only": 4, "neither": 31},
+      "mcnemar_exact_p_descriptive": 1.0,
+      "win_conditions_for_reference_not_used_for_a_tie": {
+        "cond2_mutation_failure_rate_halved": false,
+        "cond3_new_major_failure_mode": "M_NO_EFFECT (CONTROL 0 tasks, TREATMENT 3 tasks)"
+      },
+      "registered_verdict": "E4 TIE"
+    }
+  ],
+  "model": "gemma-4-31b-it (QAT W4A16 checkpoint)",
+  "sampling": {"temperature": 0.2, "top_p": 0.95, "max_output_tokens": 8192, "thinking": false},
+  "budgets": {"max_tool_calls": 50, "time_minutes": 3, "turns": 150, "per_command_seconds": 90},
+  "serving": {"engine": "vLLM 0.19.1", "tensor_parallel": 4, "hardware": "4x NVIDIA L4"},
+  "panel": {"n_tasks": 48, "description": "fixed 48-task development panel of Python repository issues"},
+  "public_record_is_sanitized": true,
+  "withheld": ["task identifiers", "raw traces", "prompts and agent bundles", "harness-dependent scripts"]
+}

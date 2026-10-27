@@ -1,0 +1,19 @@
+experiment,run,arm,thinking,max_tool_calls,time_cap_min,n_tasks,solved,validity,registered_verdict,record
+E3,run1,CONTROL,off,50,3,48,9,VALID,INCONCLUSIVE (not a win),experiments/e3/RESULTS.md
+E3,run1,TREATMENT,off,50,3,48,15,VALID,INCONCLUSIVE (not a win),experiments/e3/RESULTS.md
+E3,confirmation,CONTROL,off,50,3,48,,INVALID,no verdict (infrastructure outage),experiments/e3/RESULTS.md
+E3,confirmation,TREATMENT,off,50,3,48,,INVALID,no verdict (infrastructure outage),experiments/e3/RESULTS.md
+E3,final,CONTROL,off,50,3,48,12,VALID,E3 CONFIRMED,experiments/e3/RESULTS.md
+E3,final,TREATMENT,off,50,3,48,15,VALID,E3 CONFIRMED,experiments/e3/RESULTS.md
+E4,main,CONTROL,off,50,3,48,13,VALID,E4 TIE,experiments/e4/RESULTS.md
+E4,main,TREATMENT,off,50,3,48,14,VALID,E4 TIE,experiments/e4/RESULTS.md
+E5,pilot,TREATMENT,off,50,3,10,,VALID,NO-GO,experiments/e5/RESULTS.md
+E5G,pilot,SHADOW,off,50,3,10,,VALID,LOOPS REMOVED: NO,experiments/e5g/RESULTS.md
+E5G,pilot,GUARD,off,50,3,10,,VALID,LOOPS REMOVED: NO,experiments/e5g/RESULTS.md
+E6R,pilot,THINK_DROP,on (budget 512),50,3,4,,VALID,BROKEN,experiments/e6r/RESULTS.md
+E6R,pilot,THINK_KEEP,on (budget 512),50,3,4,,VALID,MECHANICALLY CLEAN,experiments/e6r/RESULTS.md
+E7,main,E7,on (budget 4096),28,8,48,19,VALID,NOT PROMISING,experiments/e7/RESULTS.md
+E8,main,CONTROL,on (budget 4096),28,8,48,21,VALID,E8 WIN; mechanism NOT CONFIRMED,experiments/e8/RESULTS.md
+E8,main,TREATMENT,on (budget 4096),36,8,48,24,VALID,E8 WIN; mechanism NOT CONFIRMED,experiments/e8/RESULTS.md
+E9,pilot,ARM_A,on (budget 4096),32,8,8,,NOT YET ANALYSED,not available,experiments/e9/RESULTS.md
+E9,pilot,ARM_B,on (budget 4096),32,7,8,,NOT YET ANALYSED,not available,experiments/e9/RESULTS.md

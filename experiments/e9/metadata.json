@@ -1,0 +1,57 @@
+{
+  "id": "E9",
+  "name": "Runtime-budget pilot (32 calls, 8 vs 7 minutes)",
+  "status": "completed_not_analysed",
+  "design": "paired runtime-engineering screening pilot on an 8-task stress panel",
+  "design_note": "Only the per-task time cap differs between arms. Not a gate for any external evaluation and not an estimate of the overall solve rate.",
+  "runs": [
+    {
+      "label": "pilot",
+      "validity": "not yet assessed",
+      "frozen_utc": "2026-10-27T10:28:32Z",
+      "frozen_utc_note": "re-freeze after Amendment 1 (pre-data; made after launch, before any output was retrieved or seen)",
+      "initial_freeze_utc": "2026-10-27T10:24:21Z",
+      "launched_utc": "2026-10-27T10:24:38Z",
+      "completed_utc": "2026-10-27T12:06:39Z",
+      "completed_utc_basis": "first status check that showed the run complete (the previous check, 12:01:33Z, showed it running)",
+      "original_preregistration_sha256": "32819cb2b1e7ad355de45f0fda89edb73242074e5ecf5d1fdecad389aa8089b6",
+      "initial_preregistration_sha256": "e12d8c57b428ac9781230599621bdf78ef0625689e0a16b3b8303558299af9b4",
+      "original_freeze_manifest_file_count": 32,
+      "original_freeze_manifest_input_count": 10,
+      "outputs_retrieved": false,
+      "n_jobs_planned": 16,
+      "arms": {
+        "A": {"runner_label": "CONTROL", "max_tool_calls": 32, "time_minutes": 8},
+        "B": {"runner_label": "TREATMENT", "max_tool_calls": 32, "time_minutes": 7}
+      },
+      "registered_outcomes": ["PREFER 32/7", "PREFER 32/8", "MIXED", "INSUFFICIENT (PARTIAL run with fewer than 6 complete pairs)"],
+      "amendments": [
+        {
+          "id": 1,
+          "summary": "time cap reached also counts an agent active span of at least the cap minus 3 s (silent time cap); can only make the rule stricter against 32/7"
+        }
+      ]
+    }
+  ],
+  "results": null,
+  "panel": {
+    "n_tasks": 8,
+    "description": "stress panel drawn from the 48-task development panel by a deterministic rule on E8 traces: G1 = 3 E8 treatment-only solves, G2 = 2 E8 solves with the last source edit after 420 s, G3 = 3 highest stress-score tasks",
+    "selection_rule_written_after_viewing_e8_per_task_data": true,
+    "representative_of_48_task_panel": false
+  },
+  "model": "gemma-4-31b-it (QAT W4A16 checkpoint)",
+  "sampling": {
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "max_output_tokens": 8192,
+    "thinking": true,
+    "thinking_budget": 4096,
+    "thoughts_retained_in_history": true
+  },
+  "budgets": {"tool_calls": 32, "time_minutes": {"A": 8, "B": 7}, "turns": 80, "command_timeout_s": 240},
+  "serving": {"engine": "vLLM 0.19.1", "tensor_parallel": 4, "hardware": "4x NVIDIA L4"},
+  "known_caveat": "the system prompt is unchanged and still states 28 tool calls and 8 minutes in both arms",
+  "public_record_is_sanitized": true,
+  "withheld": ["task identifiers", "raw traces", "prompts and agent bundles", "harness-dependent scripts"]
+}

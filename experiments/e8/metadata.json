@@ -1,0 +1,56 @@
+{
+  "id": "E8",
+  "name": "Paired tool-call budget (28 vs 36)",
+  "status": "completed",
+  "runs": [
+    {
+      "label": "main",
+      "validity": "VALID",
+      "frozen_utc": "2026-10-24T18:08:41Z",
+      "launched_utc": "2026-10-24T18:10:51Z",
+      "completed_utc": "2026-10-25T06:11:06Z",
+      "completed_utc_basis": "first status check that showed the run complete; status checks paused overnight, and the run itself took 8.41 h from launch, so it ended before this check",
+      "original_preregistration_sha256": "aa10317500398b2da3384c424a0970ff0aa14383d74b899a7d8e77bc73870d23",
+      "original_freeze_manifest_file_count": 60,
+      "arms": {
+        "CONTROL": {"max_tool_calls": 28, "solved": 21, "n": 48},
+        "TREATMENT": {"max_tool_calls": 36, "solved": 24, "n": 48}
+      },
+      "paired": {"both": 21, "control_only": 0, "treatment_only": 3, "neither": 24},
+      "mcnemar_exact_p_descriptive": 0.25,
+      "validity_gates": {"V1": "PASS", "V2": "PASS", "V3": "PASS", "V4": "PASS", "V5": "PASS", "V6": "PASS", "V7": "PASS", "V8": "PASS", "V9": "PASS"},
+      "evaluability": {"CONTROL": {"X1": true, "X2": true, "X3": true}, "TREATMENT": {"X1": true, "X2": true, "X3": true}},
+      "mechanism_terms": {
+        "M1": {"n_C": 16, "n_T": 11, "a_C": 24, "a_T": 19, "n_drop_ge_6": false, "n_T_le_0.70_n_C": true, "a_drop_ge_3": true, "held": false},
+        "M2": {"U": 7, "D": 3, "U_ge_5": true, "D_ge_2": true, "held": true}
+      },
+      "projected_120_task_runtime_h": {"CONTROL": 10.84, "TREATMENT": 10.82, "TREATMENT_label": "COMFORTABLE"},
+      "registered_verdicts": {
+        "competitive": "E8 WIN",
+        "mechanism": "BUDGET BOTTLENECK NOT CONFIRMED (M2 held, M1 failed)"
+      }
+    }
+  ],
+  "operational_followup": {
+    "external_runtime_budget_exceeded": 2,
+    "third_attempt": false,
+    "classification": "operationally unsafe",
+    "performance_conclusion": "none drawn from these runs",
+    "registered_verdicts_changed": false
+  },
+  "model": "gemma-4-31b-it (QAT W4A16 checkpoint)",
+  "sampling": {
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "max_output_tokens": 8192,
+    "thinking": true,
+    "thinking_budget": 4096,
+    "thoughts_retained_in_history": true
+  },
+  "budgets": {"time_minutes": 8, "turns": 80, "command_timeout_s": 240},
+  "serving": {"engine": "vLLM 0.19.1", "tensor_parallel": 4, "hardware": "4x NVIDIA L4"},
+  "panel": {"n_tasks": 48, "description": "fixed 48-task development panel of Python repository issues"},
+  "preregistered_limitation": "the system prompt was identical in both arms and still stated 28 tool calls",
+  "public_record_is_sanitized": true,
+  "withheld": ["task identifiers", "raw traces", "prompts and agent bundles", "harness-dependent scripts"]
+}

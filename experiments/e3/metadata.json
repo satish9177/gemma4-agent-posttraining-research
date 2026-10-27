@@ -1,0 +1,65 @@
+{
+  "id": "E3",
+  "name": "Tool-protocol reliability: read serialization",
+  "status": "completed",
+  "status_note": "One design run three times. Run 1 and the final run are valid; the confirmation run is INVALID (inference server stopped accepting connections partway through the treatment arm), archived, and excluded from every conclusion.",
+  "runs": [
+    {
+      "label": "run1",
+      "validity": "VALID",
+      "validity_note": "No validity gates were registered for this run; a later check found 0 inference-server errors in 3,440 model calls.",
+      "frozen_utc": "2026-10-17T16:57:05Z",
+      "completed_utc": "2026-10-17T19:07Z",
+      "completed_utc_note": "approximate, minute precision (from the run log and the last recorded model call)",
+      "original_preregistration_sha256": ["fd02002de4f356f661d7634e87ccb9c55d05a73823412dffabf0ad0e54e2a84f"],
+      "orchestration": "arms sequential, CONTROL first, inference server restarted between arms",
+      "arms": {
+        "CONTROL": {"solved": 9, "n": 48, "corrupted_calls": 385, "traced_tool_calls": 1653},
+        "TREATMENT": {"solved": 15, "n": 48, "corrupted_calls": 111, "traced_tool_calls": 1576}
+      },
+      "paired": {"both": 9, "control_only": 0, "treatment_only": 6, "neither": 33},
+      "mcnemar_exact_p_descriptive": 0.03125,
+      "registered_verdict": "INCONCLUSIVE (not a win)"
+    },
+    {
+      "label": "confirmation",
+      "validity": "INVALID",
+      "validity_note": "Registered checks (48 paired tasks, 48 traces per arm, identical host versions) passed but did not cover server health. About 2,623 s into the TREATMENT arm the inference server stopped accepting connections and never recovered; the last 12 TREATMENT tasks failed with connection errors. Ruled INVALID / COMPROMISED; the label printed by the frozen analysis is void.",
+      "frozen_utc": "2026-10-18T07:37:42Z",
+      "completed_utc": "2026-10-18T09:50Z",
+      "completed_utc_note": "approximate, minute precision (from the run log and the last recorded model call)",
+      "original_preregistration_sha256": ["494d6b361330ca3b92e8f1abc7c4608b6d9f8a9a3d28d599a692dd9ef41b925e"],
+      "orchestration": "arms sequential, CONTROL first, inference server restarted between arms",
+      "arms": {
+        "CONTROL": {"solved": null, "n": 48},
+        "TREATMENT": {"solved": null, "n": 48}
+      },
+      "paired": null,
+      "mcnemar_exact_p_descriptive": null,
+      "registered_verdict": "none (invalid run)"
+    },
+    {
+      "label": "final",
+      "validity": "VALID",
+      "validity_note": "All six registered checks V1-V6 passed: 96/96 jobs ended normally, arm-order rule held, 670 health checks with 0 failed attempts, 0 HTTP 5xx responses.",
+      "frozen_utc": "2026-10-18T12:03:09Z",
+      "completed_utc": "2026-10-18T14:11:39Z",
+      "original_preregistration_sha256": ["dbddc9ee3a07959829182911f1ed2e3cf89a6cfda3ae914db5e74ebce7b47a71"],
+      "orchestration": "one inference server for both arms; arm order alternating by task; 2 jobs at a time; health checks and abort on any server failure",
+      "arms": {
+        "CONTROL": {"solved": 12, "n": 48, "corrupted_calls": 350, "traced_tool_calls": 1789},
+        "TREATMENT": {"solved": 15, "n": 48, "corrupted_calls": 95, "traced_tool_calls": 1491}
+      },
+      "paired": {"both": 11, "control_only": 1, "treatment_only": 4, "neither": 32},
+      "mcnemar_exact_p_descriptive": 0.375,
+      "registered_verdict": "E3 CONFIRMED"
+    }
+  ],
+  "model": "gemma-4-31b-it (QAT W4A16 checkpoint)",
+  "sampling": {"temperature": 0.2, "top_p": 0.95, "max_output_tokens": 8192, "thinking": false},
+  "budgets": {"max_tool_calls": 50, "time_minutes": 3, "turns": 150, "per_command_seconds": 90},
+  "serving": {"engine": "vLLM 0.19.1", "tensor_parallel": 4, "hardware": "4x NVIDIA L4"},
+  "panel": {"n_tasks": 48, "description": "fixed 48-task development panel of Python repository issues"},
+  "public_record_is_sanitized": true,
+  "withheld": ["task identifiers", "raw traces", "prompts and agent bundles", "harness-dependent scripts"]
+}

@@ -1,0 +1,58 @@
+{
+  "id": "E5",
+  "name": "Progress-rules prompt pilot",
+  "status": "completed",
+  "status_note": "Go/no-go pilot completed; registered decision NO-GO, so the registered 48-task paired run was not launched.",
+  "design": "single-arm go/no-go pilot vs historical baseline (registered paired follow-up conditional on GO)",
+  "scope_note": "Thinking off, 10 always-looping tasks. The broad reading at the time, that loops are intrinsic to the policy, was later superseded by thinking-on runs (E7, E8), which also changed budgets, prompt and agent design.",
+  "runs": [
+    {
+      "label": "pilot",
+      "validity": "VALID",
+      "frozen_utc": "2026-10-21T14:58:32Z",
+      "completed_utc": "2026-10-21T15:22Z",
+      "completed_utc_note": "approximate, minute precision",
+      "original_preregistration_sha256": "b1a5b0d5f0a3e477a534c1c748a36ad23ef786f99d406d0704bd34c05b87c58d",
+      "n_tasks_per_arm": 10,
+      "task_set": "the 10 always-looping tasks of the fixed 48-task development panel (>= 5 root-agent NNI calls in each of 3 earlier valid baseline runs)",
+      "concurrency": 2,
+      "arms": {
+        "PROGRESS_RULES": {
+          "description": "unchanged agent plus a progress-rules section appended to the system prompt",
+          "nni_calls": 191,
+          "calls_excluding_status": 445,
+          "nni_rate": 0.429,
+          "resolved_descriptive_only": 1
+        }
+      },
+      "baseline": {
+        "description": "3 earlier valid runs of the unchanged agent on the same 10 tasks",
+        "nni_calls": 806,
+        "calls_excluding_status": 1363,
+        "nni_rate": 0.591,
+        "nni_rate_per_run": [0.586, 0.573, 0.615],
+        "resolved_descriptive_only_per_run": [0, 0, 0]
+      },
+      "ratio_to_baseline": 0.73,
+      "registered_thresholds": {
+        "GO": "pilot valid and pooled NNI rate <= 0.295 (exact fraction, no rounding)",
+        "NO-GO": "pooled NNI rate > 0.295"
+      },
+      "registered_labels": {
+        "pilot_validity": "VALID",
+        "pilot_decision": "NO-GO"
+      }
+    }
+  ],
+  "fixed_settings": {
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "max_output_tokens": 8192,
+    "thinking": "off",
+    "budgets": {"per_task_minutes": 3, "tool_calls": 50, "turns": 150, "per_command_seconds": 90}
+  },
+  "model": "gemma-4-31b-it (QAT W4A16 checkpoint)",
+  "serving": {"engine": "vLLM 0.19.1", "tensor_parallel": 4, "hardware": "4x NVIDIA L4"},
+  "public_record_is_sanitized": true,
+  "withheld": ["task identifiers", "raw traces", "prompts and agent bundles", "harness-dependent scripts"]
+}
