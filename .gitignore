@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Secrets and credentials (never commit)
+.env
+.env.*
+*.key
+*.pem
+kaggle.json
+**/credentials*
+**/*token*
+
+# Downloaded data caches
+analysis/.cache_inventory/
+.cache*/
+*.parquet
+
+# Model artifacts
+*.safetensors
+*.bin
+*.pt
+checkpoints/
+adapters/
+
+# Raw traces and restricted benchmark data are never published here
+traces/
+raw/
+private/
+PRIVATE_*
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
