@@ -1,0 +1,1629 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-10-27T13:26:46Z",
+  "script": "analysis/post_release_inventory.py",
+  "question": "Are there enough Python repository-issue tasks created on or after 2026-04-02T00:00:00Z (Gemma 4 public release), with a runnable Docker/test environment and an open license, to build a ~300-task fresh evaluation set that is repo-disjoint from the V2 Python training pool?",
+  "parameters": {
+    "cutoff_utc": "2026-04-02T00:00:00Z",
+    "target_tasks": 300,
+    "min_tasks": 200,
+    "gold_validation_prior": {
+      "kept": 101,
+      "total": 115,
+      "keep_rate": 0.8783
+    },
+    "revisions": "pinned",
+    "cache_dir": "default",
+    "github_checks": true,
+    "dockerhub_checks": true,
+    "open_license_spdx_ids": [
+      "0BSD",
+      "AFL-3.0",
+      "AGPL-3.0",
+      "AGPL-3.0-only",
+      "AGPL-3.0-or-later",
+      "Apache-2.0",
+      "Artistic-2.0",
+      "BSD-2-Clause",
+      "BSD-3-Clause",
+      "BSD-3-Clause-Clear",
+      "BSL-1.0",
+      "CC0-1.0",
+      "ECL-2.0",
+      "EPL-1.0",
+      "EPL-2.0",
+      "EUPL-1.1",
+      "EUPL-1.2",
+      "GPL-2.0",
+      "GPL-2.0-only",
+      "GPL-2.0-or-later",
+      "GPL-3.0",
+      "GPL-3.0-only",
+      "GPL-3.0-or-later",
+      "ISC",
+      "LGPL-2.1",
+      "LGPL-2.1-only",
+      "LGPL-2.1-or-later",
+      "LGPL-3.0",
+      "LGPL-3.0-only",
+      "LGPL-3.0-or-later",
+      "MIT",
+      "MIT-0",
+      "MPL-2.0",
+      "MulanPSL-2.0",
+      "NCSA",
+      "OSL-3.0",
+      "PSF-2.0",
+      "PostgreSQL",
+      "Python-2.0",
+      "UPL-1.0",
+      "Unlicense",
+      "Zlib"
+    ],
+    "manual_license_review": {
+      "raullenchai/rapid-mlx": {
+        "spdx_id": "Apache-2.0",
+        "note": "LICENSE is the Apache-2.0 text preceded by a short project preamble and a NOTICE pointer; GitHub reports NOASSERTION. Read by hand on 2026-10-27."
+      }
+    },
+    "created_at_note": "naive created_at timestamps are treated as UTC (GitHub API times)",
+    "repo_match_note": "repos matched case-insensitively on owner/name, and on GitHub's current canonical owner/name for the candidate repos"
+  },
+  "training_pool": {
+    "dataset_id": "nebius/SWE-rebench-V2",
+    "revision_sha": "10483de0f50fe5da545942705a76c6150171af7f",
+    "last_modified": "2026-10-01T17:53:16.000Z",
+    "license": "cc-by-4.0",
+    "split": "train",
+    "files_read": [
+      {
+        "path": "data/train-00000-of-00001.parquet",
+        "columns": [
+          "created_at",
+          "image_name",
+          "instance_id",
+          "language",
+          "repo"
+        ],
+        "fetch": "http-range",
+        "file_bytes": 428839266,
+        "bytes_downloaded": 20703061,
+        "requests": 506,
+        "merged_ranges": 503,
+        "on_demand_misses": 0,
+        "served_from_cache": true
+      }
+    ],
+    "language_field": "language",
+    "rows": 32079,
+    "languages": {
+      "python": 7243,
+      "go": 6144,
+      "ts": 4204,
+      "js": 4138,
+      "rust": 3123,
+      "java": 1716,
+      "php": 1445,
+      "kotlin": 889,
+      "julia": 793,
+      "elixir": 416,
+      "scala": 411,
+      "swift": 362,
+      "dart": 251,
+      "c": 230,
+      "cpp": 182,
+      "csharp": 173,
+      "r": 157,
+      "clojure": 105,
+      "ocaml": 58,
+      "lua": 39
+    },
+    "python_rows": 7243,
+    "python_repos": 690,
+    "all_language_repos": 3615,
+    "python_rows_with_image_name": 7243,
+    "created_at_min_utc": "2014-11-10T05:17:52Z",
+    "created_at_max_utc": "2025-10-31T18:00:44Z",
+    "python_rows_on_or_after_cutoff": 0
+  },
+  "download_summary": {
+    "parquet_files_read": 23,
+    "parquet_bytes_total": 3238903455,
+    "bytes_downloaded_for_needed_columns": 36878670,
+    "note": "byte counts are from the original fetch; later runs read the local column cache"
+  },
+  "sources": {
+    "swe_rebench_leaderboard": {
+      "role": "primary",
+      "counted_toward_test_set": true,
+      "dataset_id": "nebius/SWE-rebench-leaderboard",
+      "revision_sha": "34d5a58864acf91613740a09ec5d205228dcfa39",
+      "last_modified": "2026-07-28T09:59:05.000Z",
+      "license": "cc-by-4.0",
+      "splits_available": [
+        "2025_01",
+        "2025_02",
+        "2025_03",
+        "2025_04",
+        "2025_05",
+        "2025_06",
+        "2025_07",
+        "2025_08",
+        "2025_09",
+        "2025_10",
+        "2025_11",
+        "2025_12",
+        "2026_01",
+        "2026_02",
+        "2026_03",
+        "test"
+      ],
+      "splits_read": [
+        "2025_01",
+        "2025_02",
+        "2025_03",
+        "2025_04",
+        "2025_05",
+        "2025_06",
+        "2025_07",
+        "2025_08",
+        "2025_09",
+        "2025_10",
+        "2025_11",
+        "2025_12",
+        "2026_01",
+        "2026_02",
+        "2026_03",
+        "test"
+      ],
+      "files_read": [
+        {
+          "path": "data/2025_01-00000-of-00001.parquet",
+          "columns": [
+            "created_at",
+            "docker_image",
+            "image_name",
+            "install_config",
+            "instance_id",
+            "repo"
+          ],
+          "fetch": "http-range",
+          "file_bytes": 526928,
+          "bytes_downloaded": 546131,
+          "requests": 5,
+          "merged_ranges": 3,
+          "on_demand_misses": 0,
+          "served_from_cache": true
+        },
+        {
+          "path": "data/2025_02-00000-of-00001.parquet",
+          "columns": [
+            "created_at",
+            "docker_image",
+            "image_name",
+            "install_config",
+            "instance_id",
+            "repo"
+          ],
+          "fetch": "http-range",
+          "file_bytes": 405283,
+          "bytes_downloaded": 419673,
+          "requests": 5,
+          "merged_ranges": 3,
+          "on_demand_misses": 0,
+          "served_from_cache": true
+        },
+        {
+          "path": "data/2025_03-00000-of-00001.parquet",
+          "columns": [
+            "created_at",
+            "docker_image",
+            "image_name",
+            "install_config",
+            "instance_id",
+            "repo"
+          ],
+          "fetch": "http-range",
+          "file_bytes": 301878,
+          "bytes_downloaded": 314085,
+          "requests": 5,
+          "merged_ranges": 3,
+          "on_demand_misses": 0,
+          "served_from_cache": true
+        },
+        {
+          "path": "data/2025_04-00000-of-00001.parquet",
+          "columns": [
+            "created_at",
+            "docker_image",
+            "image_name",
+            "install_config",
+            "instance_id",
+            "repo"
+          ],
+          "fetch": "http-range",
+          "file_bytes": 191540,
+          "bytes_downloaded": 234901,
+          "requests": 4,
+          "merged_ranges": 2,
+          "on_demand_misses": 0,
+          "served_from_cache": true
+        },
+        {
+          "path": "data/2025_05-00000-of-00001.parquet",
+          "columns": [
+            "created_at",
+            "docker_image",
+            "image_name",
+            "install_config",
+            "instance_id",
+            "repo"
+          ],
+          "fetch": "http-range",
+          "file_bytes": 203481,
+          "bytes_downloaded": 272699,
+          "requests": 4,
+          "merged_ranges": 2,
+          "on_demand_misses": 0,
+          "served_from_cache": true
+        },
+        {
+          "path": "data/2025_06-00000-of-00001.parquet",
+          "columns": [
+            "created_at",
+            "docker_image",
+            "image_name",
+            "install_config",
+            "instance_id",
+            "repo"
+          ],
+          "fetch": "http-range",
+          "file_bytes": 259404,
+          "bytes_downloaded": 318011,
+          "requests": 4,
+          "merged_ranges": 2,
+          "on_demand_misses": 0,
+          "served_from_cache": true
+        },
+        {
+          "path": "data/2025_07-00000-of-00001.parquet",
+          "columns": [
+            "created_at",
+            "docker_image",
+            "image_name",
+            "install_config",
+            "instance_id",
+            "repo"
+          ],
+          "fetch": "http-range",
+          "file_bytes": 206409,
+          "bytes_downloaded": 255934,
+          "requests": 4,
+          "merged_ranges": 2,
+          "on_demand_misses": 0,
+          "served_from_cache": true
+        },
+        {
+          "path": "data/2025_08-00000-of-00001.parquet",
+          "columns": [
+            "created_at",
+            "docker_image",
+            "image_name",
+            "install_config",
+            "instance_id",
+            "repo"
+          ],
+          "fetch": "http-range",
+          "file_bytes": 275616,
+          "bytes_downloaded": 316287,
+          "requests": 4,
+          "merged_ranges": 2,
+          "on_demand_misses": 0,
+          "served_from_cache": true
+        },
+        {
+          "path": "data/2025_09-00000-of-00001.parquet",
+          "columns": [
+            "created_at",
+            "docker_image",
+            "image_name",
+            "install_config",
+            "instance_id",
+            "repo"
+          ],
+          "fetch": "http-range",
+          "file_bytes": 336025,
+          "bytes_downloaded": 347851,
+          "requests": 5,
+          "merged_ranges": 3,
+          "on_demand_misses": 0,
+          "served_from_cache": true
+        },
+        {
+          "path": "data/2025_10-00000-of-00001.parquet",
+          "columns": [
+            "created_at",
+            "docker_image",
+            "image_name",
+            "install_config",
+            "instance_id",
+            "repo"
+          ],
+          "fetch": "http-range",
+          "file_bytes": 305686,
+          "bytes_downloaded": 314882,
+          "requests": 5,
+          "merged_ranges": 3,
+          "on_demand_misses": 0,
+          "served_from_cache": true
+        },
+        {
+          "path": "data/2025_11-00000-of-00001.parquet",
+          "columns": [
+            "created_at",
+            "docker_image",
+            "image_name",
+            "install_config",
+            "instance_id",
+            "repo"
+          ],
+          "fetch": "http-range",
+          "file_bytes": 196856,
+          "bytes_downloaded": 245056,
+          "requests": 4,
+          "merged_ranges": 2,
+          "on_demand_misses": 0,
+          "served_from_cache": true
+        },
+        {
+          "path": "data/2025_12-00000-of-00001.parquet",
+          "columns": [
+            "created_at",
+            "docker_image",
+            "image_name",
+            "install_config",
+            "instance_id",
+            "repo"
+          ],
+          "fetch": "http-range",
+          "file_bytes": 380325,
+          "bytes_downloaded": 390896,
+          "requests": 5,
+          "merged_ranges": 3,
+          "on_demand_misses": 0,
+          "served_from_cache": true
+        },
+        {
+          "path": "data/2026_01-00000-of-00001.parquet",
+          "columns": [
+            "created_at",
+            "docker_image",
+            "image_name",
+            "install_config",
+            "instance_id",
+            "repo"
+          ],
+          "fetch": "http-range",
+          "file_bytes": 679726,
+          "bytes_downloaded": 692401,
+          "requests": 5,
+          "merged_ranges": 3,
+          "on_demand_misses": 0,
+          "served_from_cache": true
+        },
+        {
+          "path": "data/2026_02-00000-of-00001.parquet",
+          "columns": [
+            "created_at",
+            "docker_image",
+            "image_name",
+            "install_config",
+            "instance_id",
+            "repo"
+          ],
+          "fetch": "http-range",
+          "file_bytes": 364512,
+          "bytes_downloaded": 377708,
+          "requests": 5,
+          "merged_ranges": 3,
+          "on_demand_misses": 0,
+          "served_from_cache": true
+        },
+        {
+          "path": "data/2026_03-00000-of-00001.parquet",
+          "columns": [
+            "created_at",
+            "docker_image",
+            "image_name",
+            "install_config",
+            "instance_id",
+            "repo"
+          ],
+          "fetch": "http-range",
+          "file_bytes": 797808,
+          "bytes_downloaded": 816845,
+          "requests": 5,
+          "merged_ranges": 3,
+          "on_demand_misses": 0,
+          "served_from_cache": true
+        },
+        {
+          "path": "data/test-00000-of-00001.parquet",
+          "columns": [
+            "created_at",
+            "docker_image",
+            "image_name",
+            "install_config",
+            "instance_id",
+            "repo"
+          ],
+          "fetch": "http-range",
+          "file_bytes": 4864925,
+          "bytes_downloaded": 1161441,
+          "requests": 5,
+          "merged_ranges": 3,
+          "on_demand_misses": 0,
+          "served_from_cache": true
+        }
+      ],
+      "python_rule": "install_config.python (interpreter version) is set",
+      "env_rule": "docker_image is a non-empty image reference (prebuilt image per task)",
+      "rows_read": 1720,
+      "unique_instances": 860,
+      "created_at_min_utc": "2025-01-03T00:43:09Z",
+      "created_at_max_utc": "2026-05-12T11:45:06Z",
+      "rows_per_split": {
+        "2025_01": 109,
+        "2025_02": 76,
+        "2025_03": 62,
+        "2025_04": 40,
+        "2025_05": 40,
+        "2025_06": 40,
+        "2025_07": 30,
+        "2025_08": 52,
+        "2025_09": 50,
+        "2025_10": 51,
+        "2025_11": 47,
+        "2025_12": 48,
+        "2026_01": 48,
+        "2026_02": 57,
+        "2026_03": 110,
+        "test": 860
+      },
+      "post_cutoff_rows_per_split": {
+        "2026_03": 62,
+        "test": 62
+      },
+      "funnel": {
+        "unique_instances": 860,
+        "created_on_or_after_cutoff": 62,
+        "and_python": 62,
+        "and_env_reference": 62
+      },
+      "post_cutoff_by_month": {
+        "2026-04": 41,
+        "2026-05": 21
+      },
+      "test_split_equals_union_of_monthly_splits": true,
+      "post_cutoff_tasks_by_monthly_split": {
+        "2026_03": 62
+      },
+      "python_tasks_by_creation_month_all_time": {
+        "2025-01": 109,
+        "2025-02": 76,
+        "2025-03": 62,
+        "2025-04": 40,
+        "2025-05": 40,
+        "2025-06": 40,
+        "2025-07": 30,
+        "2025-08": 52,
+        "2025-09": 50,
+        "2025-10": 51,
+        "2025-11": 47,
+        "2025-12": 48,
+        "2026-01": 48,
+        "2026-02": 57,
+        "2026-03": 46,
+        "2026-04": 43,
+        "2026-05": 21
+      }
+    },
+    "swe_bench_live": {
+      "role": "top-up",
+      "counted_toward_test_set": true,
+      "dataset_id": "SWE-bench-Live/SWE-bench-Live",
+      "revision_sha": "b51a86422e10cfd403beb4773e5a2947953e36ec",
+      "last_modified": "2026-09-04T09:38:41.000Z",
+      "license": "mit",
+      "splits_available": [
+        "full",
+        "lite",
+        "test",
+        "verified"
+      ],
+      "splits_read": [
+        "full"
+      ],
+      "files_read": [
+        {
+          "path": "data/full-00000-of-00002.parquet",
+          "columns": [
+            "created_at",
+            "instance_id",
+            "log_parser",
+            "repo"
+          ],
+          "fetch": "http-range",
+          "file_bytes": 48133221,
+          "bytes_downloaded": 1123242,
+          "requests": 4,
+          "merged_ranges": 2,
+          "on_demand_misses": 0,
+          "served_from_cache": true
+        },
+        {
+          "path": "data/full-00001-of-00002.parquet",
+          "columns": [
+            "created_at",
+            "instance_id",
+            "log_parser",
+            "repo"
+          ],
+          "fetch": "http-range",
+          "file_bytes": 50103053,
+          "bytes_downloaded": 1133078,
+          "requests": 4,
+          "merged_ranges": 2,
+          "on_demand_misses": 0,
+          "served_from_cache": true
+        }
+      ],
+      "python_rule": "dataset is Python-only (README)",
+      "env_rule": "per-instance Docker image documented in README; no image column in the parquet",
+      "rows_read": 1888,
+      "unique_instances": 1887,
+      "created_at_min_utc": "2021-07-22T13:35:28Z",
+      "created_at_max_utc": "2025-09-02T09:55:04Z",
+      "rows_per_split": {
+        "full": 1888
+      },
+      "post_cutoff_rows_per_split": {},
+      "funnel": {
+        "unique_instances": 1887,
+        "created_on_or_after_cutoff": 0,
+        "and_python": 0,
+        "and_env_reference": 0
+      },
+      "post_cutoff_by_month": {}
+    },
+    "swe_bench_live_windows": {
+      "role": "checked only (Windows-container tasks; not counted toward the Linux Docker test set)",
+      "counted_toward_test_set": false,
+      "dataset_id": "SWE-bench-Live/Windows",
+      "revision_sha": "b9fa25f2732dbc2c93b9738b610d053d8b7bd7a9",
+      "last_modified": "2026-09-20T07:39:54.000Z",
+      "license": "mit",
+      "splits_available": [
+        "test"
+      ],
+      "splits_read": [
+        "test"
+      ],
+      "files_read": [
+        {
+          "path": "data/test-00000-of-00001.parquet",
+          "columns": [
+            "created_at",
+            "docker_image",
+            "instance_id",
+            "language",
+            "repo"
+          ],
+          "fetch": "http-range",
+          "file_bytes": 19508798,
+          "bytes_downloaded": 1054233,
+          "requests": 5,
+          "merged_ranges": 3,
+          "on_demand_misses": 0,
+          "served_from_cache": true
+        }
+      ],
+      "python_rule": "language == 'Python'",
+      "env_rule": "docker_image is a non-empty image reference (Windows container)",
+      "rows_read": 66,
+      "unique_instances": 66,
+      "created_at_min_utc": "2024-12-27T11:29:35Z",
+      "created_at_max_utc": "2026-07-14T18:23:31Z",
+      "rows_per_split": {
+        "test": 66
+      },
+      "post_cutoff_rows_per_split": {
+        "test": 8
+      },
+      "funnel": {
+        "unique_instances": 66,
+        "created_on_or_after_cutoff": 8,
+        "and_python": 0,
+        "and_env_reference": 0
+      },
+      "post_cutoff_by_month": {
+        "2026-04": 3,
+        "2026-05": 1,
+        "2026-06": 2,
+        "2026-07": 2
+      }
+    },
+    "swe_rebench_v2_prs": {
+      "role": "checked only (date check; PR tasks without prebuilt images or a language column)",
+      "counted_toward_test_set": false,
+      "dataset_id": "nebius/SWE-rebench-V2-PRs",
+      "revision_sha": "fbf0ecf50f268d5344149e2f0097db6bede83737",
+      "last_modified": "2026-08-18T12:22:32.000Z",
+      "license": "cc-by-4.0",
+      "splits_available": [
+        "train"
+      ],
+      "splits_read": [
+        "train"
+      ],
+      "files_read": [
+        {
+          "path": "data/train-00000-of-00003.parquet",
+          "columns": [
+            "created_at",
+            "instance_id",
+            "repo"
+          ],
+          "fetch": "http-range",
+          "file_bytes": 920039138,
+          "bytes_downloaded": 1931044,
+          "requests": 131,
+          "merged_ranges": 129,
+          "on_demand_misses": 0,
+          "served_from_cache": true
+        },
+        {
+          "path": "data/train-00001-of-00003.parquet",
+          "columns": [
+            "created_at",
+            "instance_id",
+            "repo"
+          ],
+          "fetch": "http-range",
+          "file_bytes": 946882400,
+          "bytes_downloaded": 1948263,
+          "requests": 130,
+          "merged_ranges": 128,
+          "on_demand_misses": 0,
+          "served_from_cache": true
+        },
+        {
+          "path": "data/train-00002-of-00003.parquet",
+          "columns": [
+            "created_at",
+            "instance_id",
+            "repo"
+          ],
+          "fetch": "http-range",
+          "file_bytes": 815101177,
+          "bytes_downloaded": 1960948,
+          "requests": 130,
+          "merged_ranges": 128,
+          "on_demand_misses": 0,
+          "served_from_cache": true
+        }
+      ],
+      "python_rule": "not determinable (no language column)",
+      "env_rule": "no prebuilt image column; environments would have to be built",
+      "rows_read": 126300,
+      "unique_instances": 122910,
+      "created_at_min_utc": "2013-07-19T17:10:26Z",
+      "created_at_max_utc": "2025-07-23T08:48:51Z",
+      "rows_per_split": {
+        "train": 126300
+      },
+      "post_cutoff_rows_per_split": {},
+      "funnel": {
+        "unique_instances": 122910,
+        "created_on_or_after_cutoff": 0,
+        "and_python": null,
+        "and_env_reference": null
+      },
+      "post_cutoff_by_month": {}
+    }
+  },
+  "considered_not_read": [
+    {
+      "dataset_id": "nebius/SWE-rebench",
+      "reason": "original SWE-rebench corpus; last modified before the cutoff, so it cannot hold post-cutoff tasks",
+      "revision_sha": "89cdfbab4ab1bd8f5a658bb212d1b63624f4f881",
+      "last_modified": "2025-12-23T19:41:57.000Z",
+      "license": "cc-by-4.0",
+      "last_modified_before_cutoff": true
+    },
+    {
+      "dataset_id": "SWE-bench-Live/MultiLang",
+      "reason": "non-Python languages only (C, C++, C#, Go, Java, JS, Rust, TS splits)",
+      "revision_sha": "3638632e8153a10ca422c1022bed79023084b5c9",
+      "last_modified": "2026-09-20T07:41:09.000Z",
+      "license": "mit",
+      "last_modified_before_cutoff": false
+    }
+  ],
+  "off_hub_notes": [
+    {
+      "name": "SWE-rebench July 2026 snapshot on Harbor Hub (ibragim-badertdinov/swe-rebench-07-2026)",
+      "pointer": "named in the nebius/SWE-rebench-leaderboard dataset card",
+      "described_as": "111 tasks: Go 21, Java 21, Python 20, Rust 25, TypeScript 24; source declared CC BY 4.0",
+      "status": "not counted: per-task created_at, repos and licenses not verified by this script"
+    }
+  ],
+  "checked_only_sources_post_cutoff_python_with_env": {
+    "swe_bench_live_windows": 0,
+    "swe_rebench_v2_prs": 0
+  },
+  "funnel_counted_sources": {
+    "post_cutoff_python_with_env_reference": 62,
+    "image_tag_status": {
+      "published": 62
+    },
+    "after_dropping_missing_images": 62,
+    "repo_license_status": {
+      "open": 62,
+      "not_open_or_unknown": 0,
+      "spdx_ids_github": {
+        "MIT": 33,
+        "Apache-2.0": 18,
+        "BSD-3-Clause": 5,
+        "NOASSERTION": 4,
+        "BSD-2-Clause": 2
+      },
+      "manual_reviews_applied": {
+        "raullenchai/rapid-mlx": {
+          "spdx_id": "Apache-2.0",
+          "note": "LICENSE is the Apache-2.0 text preceded by a short project preamble and a NOTICE pointer; GitHub reports NOASSERTION. Read by hand on 2026-10-27.",
+          "tasks": 4
+        }
+      }
+    },
+    "after_open_license": 62,
+    "after_open_license_github_only": 58,
+    "after_repo_disjoint_from_v2_python": 47,
+    "after_repo_disjoint_from_v2_python_github_licenses_only": 43,
+    "after_repo_disjoint_from_v2_any_language": 47
+  },
+  "candidates_before_repo_exclusion": {
+    "tasks": 62,
+    "repos": 48,
+    "by_source": {
+      "swe_rebench_leaderboard": 62
+    },
+    "by_creation_month": {
+      "2026-04": 41,
+      "2026-05": 21
+    },
+    "created_at_min_utc": "2026-04-03T08:06:17Z",
+    "created_at_max_utc": "2026-05-12T11:45:06Z",
+    "max_tasks_per_repo": 4
+  },
+  "overlap_with_v2_python": {
+    "overlapping_repos": 14,
+    "overlapping_repo_names": [
+      "agronholm/anyio",
+      "azure-samples/azure-search-openai-demo",
+      "copier-org/copier",
+      "cs-si/eodag",
+      "databricks/dbt-databricks",
+      "huggingface/huggingface_hub",
+      "keras-team/keras",
+      "microsoft/qcodes",
+      "pallets-eco/wtforms",
+      "pennylaneai/pennylane",
+      "pypa/build",
+      "pypa/twine",
+      "sigma67/ytmusicapi",
+      "tox-dev/tox"
+    ],
+    "candidate_tasks_in_overlapping_repos": 15,
+    "v2_python_tasks_in_overlapping_repos": 317,
+    "candidate_repos_in_v2_any_language": 14
+  },
+  "option_a_exclude_overlap_from_test": {
+    "tasks": 47,
+    "repos": 34,
+    "by_source": {
+      "swe_rebench_leaderboard": 47
+    },
+    "by_creation_month": {
+      "2026-04": 30,
+      "2026-05": 17
+    },
+    "stricter_exclude_any_language_v2_repos": {
+      "tasks": 47,
+      "repos": 34
+    },
+    "max_tasks_per_repo": 4,
+    "instance_ids": [
+      "aallan__vera-662_interface",
+      "agentscope-ai__qwenpaw-3278",
+      "alibaba__opensandbox-816",
+      "apache__iceberg-python-3295",
+      "astronomy-commons__lsdb-1349",
+      "beever-ai__beever-atlas-102",
+      "celestoai__smolvm-172",
+      "cpp-linter__cpp-linter-hooks-206_interface",
+      "deltares__hydrolib-core-1049_interface",
+      "geopython__pygeoapi-2338",
+      "graphistry__pygraphistry-1107_interface",
+      "graphistry__pygraphistry-1277",
+      "hkuds__openharness-217",
+      "itsdnns__docsight-437",
+      "koxudaxi__datamodel-code-generator-3070",
+      "koxudaxi__datamodel-code-generator-3071",
+      "macbre__sql-metadata-625_interface",
+      "meltano__meltano-9929",
+      "meltano__meltano-9950",
+      "mempalace__mempalace-1004",
+      "nesquena__hermes-webui-1818",
+      "nesquena__hermes-webui-2056",
+      "nesquena__hermes-webui-330_interface",
+      "olofk__fusesoc-776_interface",
+      "pipecat-ai__pipecat-4283",
+      "pyinfra-dev__pyinfra-1665",
+      "pyinfra-dev__pyinfra-1679_interface",
+      "pypsa__pypsa-1653",
+      "python-scim__scim2-models-139_interface",
+      "python-wheel-build__fromager-1106",
+      "python-wheel-build__fromager-1124",
+      "raullenchai__rapid-mlx-227",
+      "raullenchai__rapid-mlx-228",
+      "raullenchai__rapid-mlx-289",
+      "raullenchai__rapid-mlx-341_interface",
+      "reframe-hpc__reframe-3660_interface",
+      "schemathesis__schemathesis-3778",
+      "schemathesis__schemathesis-3933",
+      "schemathesis__schemathesis-4087",
+      "spack__spack-52244",
+      "tobymao__sqlglot-7457",
+      "tobymao__sqlglot-7479",
+      "ultraplot__ultraplot-696",
+      "unit8co__darts-3065",
+      "vprusso__toqito-1538",
+      "youssofal__mtplx-21",
+      "zarr-developers__virtualizarr-979"
+    ]
+  },
+  "rename_transfer_checks": {
+    "method": "V2 repos sharing a candidate's short name (or its GitHub canonical short name) under another owner were resolved on GitHub",
+    "checks": [
+      {
+        "candidate_repo": "microsoft/qcodes",
+        "v2_repo": "qcodes/qcodes",
+        "v2_repo_in_python_pool": true,
+        "v2_repo_github_canonical": "microsoft/Qcodes",
+        "lookup_status": "ok",
+        "same_repository": true
+      },
+      {
+        "candidate_repo": "pallets-eco/wtforms",
+        "v2_repo": "wtforms/wtforms",
+        "v2_repo_in_python_pool": true,
+        "v2_repo_github_canonical": "pallets-eco/wtforms",
+        "lookup_status": "ok",
+        "same_repository": true
+      },
+      {
+        "candidate_repo": "pypa/build",
+        "v2_repo": "netlify/build",
+        "v2_repo_in_python_pool": false,
+        "v2_repo_github_canonical": "netlify/build",
+        "lookup_status": "ok",
+        "same_repository": false
+      },
+      {
+        "candidate_repo": "pypa/build",
+        "v2_repo": "shipwright-io/build",
+        "v2_repo_in_python_pool": false,
+        "v2_repo_github_canonical": "shipwright-io/build",
+        "lookup_status": "ok",
+        "same_repository": false
+      }
+    ],
+    "unresolved_for_manual_review": [],
+    "limitation": "renames that changed the short name on the V2 side are not detected without resolving every V2 repo"
+  },
+  "option_b_remove_overlap_from_training": {
+    "test_tasks_kept": 62,
+    "test_repos_kept": 48,
+    "v2_python_tasks_before": 7243,
+    "v2_python_tasks_removed": 317,
+    "v2_python_tasks_remaining": 6926,
+    "v2_python_repos_before": 690,
+    "v2_python_repos_removed": 14,
+    "v2_python_repos_remaining": 676
+  },
+  "repos": [
+    {
+      "repo": "raullenchai/Rapid-MLX",
+      "tasks": 4,
+      "spdx_id": "Apache-2.0",
+      "license_source": "manual_review",
+      "spdx_id_github": "NOASSERTION",
+      "github_canonical": "raullenchai/Rapid-MLX",
+      "archived": false,
+      "in_v2_python": false,
+      "in_v2_any_language": false,
+      "v2_python_repo_names_matched": [],
+      "v2_python_tasks_in_repo": 0
+    },
+    {
+      "repo": "nesquena/hermes-webui",
+      "tasks": 3,
+      "spdx_id": "MIT",
+      "license_source": "github",
+      "spdx_id_github": "MIT",
+      "github_canonical": "nesquena/hermes-webui",
+      "archived": false,
+      "in_v2_python": false,
+      "in_v2_any_language": false,
+      "v2_python_repo_names_matched": [],
+      "v2_python_tasks_in_repo": 0
+    },
+    {
+      "repo": "schemathesis/schemathesis",
+      "tasks": 3,
+      "spdx_id": "MIT",
+      "license_source": "github",
+      "spdx_id_github": "MIT",
+      "github_canonical": "schemathesis/schemathesis",
+      "archived": false,
+      "in_v2_python": false,
+      "in_v2_any_language": false,
+      "v2_python_repo_names_matched": [],
+      "v2_python_tasks_in_repo": 0
+    },
+    {
+      "repo": "agronholm/anyio",
+      "tasks": 2,
+      "spdx_id": "MIT",
+      "license_source": "github",
+      "spdx_id_github": "MIT",
+      "github_canonical": "agronholm/anyio",
+      "archived": false,
+      "in_v2_python": true,
+      "in_v2_any_language": true,
+      "v2_python_repo_names_matched": [
+        "agronholm/anyio"
+      ],
+      "v2_python_tasks_in_repo": 2
+    },
+    {
+      "repo": "graphistry/pygraphistry",
+      "tasks": 2,
+      "spdx_id": "BSD-3-Clause",
+      "license_source": "github",
+      "spdx_id_github": "BSD-3-Clause",
+      "github_canonical": "graphistry/pygraphistry",
+      "archived": false,
+      "in_v2_python": false,
+      "in_v2_any_language": false,
+      "v2_python_repo_names_matched": [],
+      "v2_python_tasks_in_repo": 0
+    },
+    {
+      "repo": "koxudaxi/datamodel-code-generator",
+      "tasks": 2,
+      "spdx_id": "MIT",
+      "license_source": "github",
+      "spdx_id_github": "MIT",
+      "github_canonical": "datamodel-code-generator/datamodel-code-generator",
+      "archived": false,
+      "in_v2_python": false,
+      "in_v2_any_language": false,
+      "v2_python_repo_names_matched": [],
+      "v2_python_tasks_in_repo": 0
+    },
+    {
+      "repo": "meltano/meltano",
+      "tasks": 2,
+      "spdx_id": "MIT",
+      "license_source": "github",
+      "spdx_id_github": "MIT",
+      "github_canonical": "meltano/meltano",
+      "archived": false,
+      "in_v2_python": false,
+      "in_v2_any_language": false,
+      "v2_python_repo_names_matched": [],
+      "v2_python_tasks_in_repo": 0
+    },
+    {
+      "repo": "pyinfra-dev/pyinfra",
+      "tasks": 2,
+      "spdx_id": "MIT",
+      "license_source": "github",
+      "spdx_id_github": "MIT",
+      "github_canonical": "pyinfra-dev/pyinfra",
+      "archived": false,
+      "in_v2_python": false,
+      "in_v2_any_language": false,
+      "v2_python_repo_names_matched": [],
+      "v2_python_tasks_in_repo": 0
+    },
+    {
+      "repo": "python-wheel-build/fromager",
+      "tasks": 2,
+      "spdx_id": "Apache-2.0",
+      "license_source": "github",
+      "spdx_id_github": "Apache-2.0",
+      "github_canonical": "python-wheel-build/fromager",
+      "archived": false,
+      "in_v2_python": false,
+      "in_v2_any_language": false,
+      "v2_python_repo_names_matched": [],
+      "v2_python_tasks_in_repo": 0
+    },
+    {
+      "repo": "tobymao/sqlglot",
+      "tasks": 2,
+      "spdx_id": "MIT",
+      "license_source": "github",
+      "spdx_id_github": "MIT",
+      "github_canonical": "tobymao/sqlglot",
+      "archived": false,
+      "in_v2_python": false,
+      "in_v2_any_language": false,
+      "v2_python_repo_names_matched": [],
+      "v2_python_tasks_in_repo": 0
+    },
+    {
+      "repo": "aallan/vera",
+      "tasks": 1,
+      "spdx_id": "MIT",
+      "license_source": "github",
+      "spdx_id_github": "MIT",
+      "github_canonical": "aallan/vera",
+      "archived": false,
+      "in_v2_python": false,
+      "in_v2_any_language": false,
+      "v2_python_repo_names_matched": [],
+      "v2_python_tasks_in_repo": 0
+    },
+    {
+      "repo": "agentscope-ai/QwenPaw",
+      "tasks": 1,
+      "spdx_id": "Apache-2.0",
+      "license_source": "github",
+      "spdx_id_github": "Apache-2.0",
+      "github_canonical": "agentscope-ai/QwenPaw",
+      "archived": false,
+      "in_v2_python": false,
+      "in_v2_any_language": false,
+      "v2_python_repo_names_matched": [],
+      "v2_python_tasks_in_repo": 0
+    },
+    {
+      "repo": "alibaba/OpenSandbox",
+      "tasks": 1,
+      "spdx_id": "Apache-2.0",
+      "license_source": "github",
+      "spdx_id_github": "Apache-2.0",
+      "github_canonical": "opensandbox-group/OpenSandbox",
+      "archived": false,
+      "in_v2_python": false,
+      "in_v2_any_language": false,
+      "v2_python_repo_names_matched": [],
+      "v2_python_tasks_in_repo": 0
+    },
+    {
+      "repo": "apache/iceberg-python",
+      "tasks": 1,
+      "spdx_id": "Apache-2.0",
+      "license_source": "github",
+      "spdx_id_github": "Apache-2.0",
+      "github_canonical": "apache/iceberg-python",
+      "archived": false,
+      "in_v2_python": false,
+      "in_v2_any_language": false,
+      "v2_python_repo_names_matched": [],
+      "v2_python_tasks_in_repo": 0
+    },
+    {
+      "repo": "astronomy-commons/lsdb",
+      "tasks": 1,
+      "spdx_id": "BSD-3-Clause",
+      "license_source": "github",
+      "spdx_id_github": "BSD-3-Clause",
+      "github_canonical": "astronomy-commons/lsdb",
+      "archived": false,
+      "in_v2_python": false,
+      "in_v2_any_language": false,
+      "v2_python_repo_names_matched": [],
+      "v2_python_tasks_in_repo": 0
+    },
+    {
+      "repo": "Azure-Samples/azure-search-openai-demo",
+      "tasks": 1,
+      "spdx_id": "MIT",
+      "license_source": "github",
+      "spdx_id_github": "MIT",
+      "github_canonical": "Azure-Samples/azure-search-openai-demo",
+      "archived": false,
+      "in_v2_python": true,
+      "in_v2_any_language": true,
+      "v2_python_repo_names_matched": [
+        "azure-samples/azure-search-openai-demo"
+      ],
+      "v2_python_tasks_in_repo": 2
+    },
+    {
+      "repo": "Beever-AI/beever-atlas",
+      "tasks": 1,
+      "spdx_id": "Apache-2.0",
+      "license_source": "github",
+      "spdx_id_github": "Apache-2.0",
+      "github_canonical": "Beever-AI/beever-atlas",
+      "archived": false,
+      "in_v2_python": false,
+      "in_v2_any_language": false,
+      "v2_python_repo_names_matched": [],
+      "v2_python_tasks_in_repo": 0
+    },
+    {
+      "repo": "CelestoAI/SmolVM",
+      "tasks": 1,
+      "spdx_id": "Apache-2.0",
+      "license_source": "github",
+      "spdx_id_github": "Apache-2.0",
+      "github_canonical": "CelestoAI/celesto",
+      "archived": false,
+      "in_v2_python": false,
+      "in_v2_any_language": false,
+      "v2_python_repo_names_matched": [],
+      "v2_python_tasks_in_repo": 0
+    },
+    {
+      "repo": "copier-org/copier",
+      "tasks": 1,
+      "spdx_id": "MIT",
+      "license_source": "github",
+      "spdx_id_github": "MIT",
+      "github_canonical": "copier-org/copier",
+      "archived": false,
+      "in_v2_python": true,
+      "in_v2_any_language": true,
+      "v2_python_repo_names_matched": [
+        "copier-org/copier"
+      ],
+      "v2_python_tasks_in_repo": 15
+    },
+    {
+      "repo": "cpp-linter/cpp-linter-hooks",
+      "tasks": 1,
+      "spdx_id": "MIT",
+      "license_source": "github",
+      "spdx_id_github": "MIT",
+      "github_canonical": "cpp-linter/cpp-linter-hooks",
+      "archived": false,
+      "in_v2_python": false,
+      "in_v2_any_language": false,
+      "v2_python_repo_names_matched": [],
+      "v2_python_tasks_in_repo": 0
+    },
+    {
+      "repo": "CS-SI/eodag",
+      "tasks": 1,
+      "spdx_id": "Apache-2.0",
+      "license_source": "github",
+      "spdx_id_github": "Apache-2.0",
+      "github_canonical": "CS-SI/eodag",
+      "archived": false,
+      "in_v2_python": true,
+      "in_v2_any_language": true,
+      "v2_python_repo_names_matched": [
+        "cs-si/eodag"
+      ],
+      "v2_python_tasks_in_repo": 47
+    },
+    {
+      "repo": "databricks/dbt-databricks",
+      "tasks": 1,
+      "spdx_id": "Apache-2.0",
+      "license_source": "github",
+      "spdx_id_github": "Apache-2.0",
+      "github_canonical": "databricks/dbt-databricks",
+      "archived": false,
+      "in_v2_python": true,
+      "in_v2_any_language": true,
+      "v2_python_repo_names_matched": [
+        "databricks/dbt-databricks"
+      ],
+      "v2_python_tasks_in_repo": 5
+    },
+    {
+      "repo": "Deltares/HYDROLIB-core",
+      "tasks": 1,
+      "spdx_id": "MIT",
+      "license_source": "github",
+      "spdx_id_github": "MIT",
+      "github_canonical": "Deltares/HYDROLIB-core",
+      "archived": false,
+      "in_v2_python": false,
+      "in_v2_any_language": false,
+      "v2_python_repo_names_matched": [],
+      "v2_python_tasks_in_repo": 0
+    },
+    {
+      "repo": "geopython/pygeoapi",
+      "tasks": 1,
+      "spdx_id": "MIT",
+      "license_source": "github",
+      "spdx_id_github": "MIT",
+      "github_canonical": "geopython/pygeoapi",
+      "archived": false,
+      "in_v2_python": false,
+      "in_v2_any_language": false,
+      "v2_python_repo_names_matched": [],
+      "v2_python_tasks_in_repo": 0
+    },
+    {
+      "repo": "HKUDS/OpenHarness",
+      "tasks": 1,
+      "spdx_id": "MIT",
+      "license_source": "github",
+      "spdx_id_github": "MIT",
+      "github_canonical": "HKUDS/OpenHarness",
+      "archived": false,
+      "in_v2_python": false,
+      "in_v2_any_language": false,
+      "v2_python_repo_names_matched": [],
+      "v2_python_tasks_in_repo": 0
+    },
+    {
+      "repo": "huggingface/huggingface_hub",
+      "tasks": 1,
+      "spdx_id": "Apache-2.0",
+      "license_source": "github",
+      "spdx_id_github": "Apache-2.0",
+      "github_canonical": "huggingface/huggingface_hub",
+      "archived": false,
+      "in_v2_python": true,
+      "in_v2_any_language": true,
+      "v2_python_repo_names_matched": [
+        "huggingface/huggingface_hub"
+      ],
+      "v2_python_tasks_in_repo": 20
+    },
+    {
+      "repo": "itsDNNS/docsight",
+      "tasks": 1,
+      "spdx_id": "MIT",
+      "license_source": "github",
+      "spdx_id_github": "MIT",
+      "github_canonical": "itsDNNS/docsight",
+      "archived": false,
+      "in_v2_python": false,
+      "in_v2_any_language": false,
+      "v2_python_repo_names_matched": [],
+      "v2_python_tasks_in_repo": 0
+    },
+    {
+      "repo": "keras-team/keras",
+      "tasks": 1,
+      "spdx_id": "Apache-2.0",
+      "license_source": "github",
+      "spdx_id_github": "Apache-2.0",
+      "github_canonical": "keras-team/keras",
+      "archived": false,
+      "in_v2_python": true,
+      "in_v2_any_language": true,
+      "v2_python_repo_names_matched": [
+        "keras-team/keras"
+      ],
+      "v2_python_tasks_in_repo": 46
+    },
+    {
+      "repo": "macbre/sql-metadata",
+      "tasks": 1,
+      "spdx_id": "MIT",
+      "license_source": "github",
+      "spdx_id_github": "MIT",
+      "github_canonical": "macbre/sql-metadata",
+      "archived": false,
+      "in_v2_python": false,
+      "in_v2_any_language": false,
+      "v2_python_repo_names_matched": [],
+      "v2_python_tasks_in_repo": 0
+    },
+    {
+      "repo": "MemPalace/mempalace",
+      "tasks": 1,
+      "spdx_id": "MIT",
+      "license_source": "github",
+      "spdx_id_github": "MIT",
+      "github_canonical": "MemPalace/mempalace",
+      "archived": false,
+      "in_v2_python": false,
+      "in_v2_any_language": false,
+      "v2_python_repo_names_matched": [],
+      "v2_python_tasks_in_repo": 0
+    },
+    {
+      "repo": "microsoft/Qcodes",
+      "tasks": 1,
+      "spdx_id": "MIT",
+      "license_source": "github",
+      "spdx_id_github": "MIT",
+      "github_canonical": "microsoft/Qcodes",
+      "archived": false,
+      "in_v2_python": true,
+      "in_v2_any_language": true,
+      "v2_python_repo_names_matched": [
+        "qcodes/qcodes"
+      ],
+      "v2_python_tasks_in_repo": 1
+    },
+    {
+      "repo": "olofk/fusesoc",
+      "tasks": 1,
+      "spdx_id": "BSD-2-Clause",
+      "license_source": "github",
+      "spdx_id_github": "BSD-2-Clause",
+      "github_canonical": "olofk/fusesoc",
+      "archived": false,
+      "in_v2_python": false,
+      "in_v2_any_language": false,
+      "v2_python_repo_names_matched": [],
+      "v2_python_tasks_in_repo": 0
+    },
+    {
+      "repo": "pallets-eco/wtforms",
+      "tasks": 1,
+      "spdx_id": "BSD-3-Clause",
+      "license_source": "github",
+      "spdx_id_github": "BSD-3-Clause",
+      "github_canonical": "pallets-eco/wtforms",
+      "archived": false,
+      "in_v2_python": true,
+      "in_v2_any_language": true,
+      "v2_python_repo_names_matched": [
+        "wtforms/wtforms"
+      ],
+      "v2_python_tasks_in_repo": 22
+    },
+    {
+      "repo": "PennyLaneAI/pennylane",
+      "tasks": 1,
+      "spdx_id": "Apache-2.0",
+      "license_source": "github",
+      "spdx_id_github": "Apache-2.0",
+      "github_canonical": "PennyLaneAI/pennylane",
+      "archived": false,
+      "in_v2_python": true,
+      "in_v2_any_language": true,
+      "v2_python_repo_names_matched": [
+        "pennylaneai/pennylane"
+      ],
+      "v2_python_tasks_in_repo": 135
+    },
+    {
+      "repo": "pipecat-ai/pipecat",
+      "tasks": 1,
+      "spdx_id": "BSD-2-Clause",
+      "license_source": "github",
+      "spdx_id_github": "BSD-2-Clause",
+      "github_canonical": "pipecat-ai/pipecat",
+      "archived": false,
+      "in_v2_python": false,
+      "in_v2_any_language": false,
+      "v2_python_repo_names_matched": [],
+      "v2_python_tasks_in_repo": 0
+    },
+    {
+      "repo": "pypa/build",
+      "tasks": 1,
+      "spdx_id": "MIT",
+      "license_source": "github",
+      "spdx_id_github": "MIT",
+      "github_canonical": "pypa/build",
+      "archived": false,
+      "in_v2_python": true,
+      "in_v2_any_language": true,
+      "v2_python_repo_names_matched": [
+        "pypa/build"
+      ],
+      "v2_python_tasks_in_repo": 11
+    },
+    {
+      "repo": "pypa/twine",
+      "tasks": 1,
+      "spdx_id": "Apache-2.0",
+      "license_source": "github",
+      "spdx_id_github": "Apache-2.0",
+      "github_canonical": "pypa/twine",
+      "archived": false,
+      "in_v2_python": true,
+      "in_v2_any_language": true,
+      "v2_python_repo_names_matched": [
+        "pypa/twine"
+      ],
+      "v2_python_tasks_in_repo": 3
+    },
+    {
+      "repo": "PyPSA/PyPSA",
+      "tasks": 1,
+      "spdx_id": "MIT",
+      "license_source": "github",
+      "spdx_id_github": "MIT",
+      "github_canonical": "PyPSA/PyPSA",
+      "archived": false,
+      "in_v2_python": false,
+      "in_v2_any_language": false,
+      "v2_python_repo_names_matched": [],
+      "v2_python_tasks_in_repo": 0
+    },
+    {
+      "repo": "python-scim/scim2-models",
+      "tasks": 1,
+      "spdx_id": "Apache-2.0",
+      "license_source": "github",
+      "spdx_id_github": "Apache-2.0",
+      "github_canonical": "python-scim/scim2-models",
+      "archived": false,
+      "in_v2_python": false,
+      "in_v2_any_language": false,
+      "v2_python_repo_names_matched": [],
+      "v2_python_tasks_in_repo": 0
+    },
+    {
+      "repo": "reframe-hpc/reframe",
+      "tasks": 1,
+      "spdx_id": "BSD-3-Clause",
+      "license_source": "github",
+      "spdx_id_github": "BSD-3-Clause",
+      "github_canonical": "reframe-hpc/reframe",
+      "archived": false,
+      "in_v2_python": false,
+      "in_v2_any_language": false,
+      "v2_python_repo_names_matched": [],
+      "v2_python_tasks_in_repo": 0
+    },
+    {
+      "repo": "sigma67/ytmusicapi",
+      "tasks": 1,
+      "spdx_id": "MIT",
+      "license_source": "github",
+      "spdx_id_github": "MIT",
+      "github_canonical": "sigma67/ytmusicapi",
+      "archived": false,
+      "in_v2_python": true,
+      "in_v2_any_language": true,
+      "v2_python_repo_names_matched": [
+        "sigma67/ytmusicapi"
+      ],
+      "v2_python_tasks_in_repo": 1
+    },
+    {
+      "repo": "spack/spack",
+      "tasks": 1,
+      "spdx_id": "Apache-2.0",
+      "license_source": "github",
+      "spdx_id_github": "Apache-2.0",
+      "github_canonical": "spack/spack",
+      "archived": false,
+      "in_v2_python": false,
+      "in_v2_any_language": false,
+      "v2_python_repo_names_matched": [],
+      "v2_python_tasks_in_repo": 0
+    },
+    {
+      "repo": "tox-dev/tox",
+      "tasks": 1,
+      "spdx_id": "MIT",
+      "license_source": "github",
+      "spdx_id_github": "MIT",
+      "github_canonical": "tox-dev/tox",
+      "archived": false,
+      "in_v2_python": true,
+      "in_v2_any_language": true,
+      "v2_python_repo_names_matched": [
+        "tox-dev/tox"
+      ],
+      "v2_python_tasks_in_repo": 7
+    },
+    {
+      "repo": "Ultraplot/UltraPlot",
+      "tasks": 1,
+      "spdx_id": "MIT",
+      "license_source": "github",
+      "spdx_id_github": "MIT",
+      "github_canonical": "Ultraplot/UltraPlot",
+      "archived": false,
+      "in_v2_python": false,
+      "in_v2_any_language": false,
+      "v2_python_repo_names_matched": [],
+      "v2_python_tasks_in_repo": 0
+    },
+    {
+      "repo": "unit8co/darts",
+      "tasks": 1,
+      "spdx_id": "Apache-2.0",
+      "license_source": "github",
+      "spdx_id_github": "Apache-2.0",
+      "github_canonical": "unit8co/darts",
+      "archived": false,
+      "in_v2_python": false,
+      "in_v2_any_language": false,
+      "v2_python_repo_names_matched": [],
+      "v2_python_tasks_in_repo": 0
+    },
+    {
+      "repo": "vprusso/toqito",
+      "tasks": 1,
+      "spdx_id": "MIT",
+      "license_source": "github",
+      "spdx_id_github": "MIT",
+      "github_canonical": "vprusso/toqito",
+      "archived": false,
+      "in_v2_python": false,
+      "in_v2_any_language": false,
+      "v2_python_repo_names_matched": [],
+      "v2_python_tasks_in_repo": 0
+    },
+    {
+      "repo": "youssofal/MTPLX",
+      "tasks": 1,
+      "spdx_id": "Apache-2.0",
+      "license_source": "github",
+      "spdx_id_github": "Apache-2.0",
+      "github_canonical": "youssofal/MTPLX",
+      "archived": false,
+      "in_v2_python": false,
+      "in_v2_any_language": false,
+      "v2_python_repo_names_matched": [],
+      "v2_python_tasks_in_repo": 0
+    },
+    {
+      "repo": "zarr-developers/VirtualiZarr",
+      "tasks": 1,
+      "spdx_id": "Apache-2.0",
+      "license_source": "github",
+      "spdx_id_github": "Apache-2.0",
+      "github_canonical": "zarr-developers/VirtualiZarr",
+      "archived": false,
+      "in_v2_python": false,
+      "in_v2_any_language": false,
+      "v2_python_repo_names_matched": [],
+      "v2_python_tasks_in_repo": 0
+    }
+  ],
+  "excluded_for_license": [],
+  "reachability": {
+    "final_candidate_rows_option_a": 47,
+    "final_candidate_rows_option_a_github_licenses_only": 43,
+    "final_candidate_rows_option_b": 62,
+    "target_300_reachable_as_rows": false,
+    "min_200_reachable_as_rows": false,
+    "expected_valid_after_gold_validation_option_a": 41.3,
+    "expected_valid_after_gold_validation_option_b": 54.5,
+    "candidate_rows_needed_at_prior": {
+      "200": 228,
+      "300": 342
+    },
+    "shortfall_rows_option_a": {
+      "200": 181,
+      "300": 295
+    },
+    "published_coverage_end_utc": "2026-05-12T11:45:06Z",
+    "rough_wait_estimate": {
+      "note": "Rough only: assumes the leaderboard keeps publishing Python tasks at its past rate, the same repo-disjoint fraction, and the gold-validation prior.",
+      "python_tasks_per_month_last_12_complete_months": 46.0,
+      "months_window": [
+        "2025-05",
+        "2026-04"
+      ],
+      "repo_disjoint_fraction_observed": 0.758,
+      "additional_months_of_published_python_tasks_for_200": 6,
+      "additional_months_of_published_python_tasks_for_300": 9
+    }
+  }
+}
