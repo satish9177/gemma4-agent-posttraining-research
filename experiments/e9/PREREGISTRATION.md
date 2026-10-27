@@ -9,7 +9,7 @@
 > | Files hashed in the freeze manifest | 32, plus 10 input files from earlier experiments |
 > | Initial freeze (UTC) | 2026-10-27T10:24:21Z, before launch at 10:24:38Z; preregistration SHA-256 at that freeze `e12d8c57b428ac9781230599621bdf78ef0625689e0a16b3b8303558299af9b4` |
 >
-> Written after the run completed but before its outputs were retrieved, this summary restates the frozen design, including Amendment 1, and adds no rules. **Amendment 1 was made after launch,** while the run was in progress and before any E9 output had been retrieved or seen.
+> Written after the run completed, from the frozen original and without consulting the run's outputs, this summary restates the frozen design, including Amendment 1, and adds no rules. The original's SHA-256 above is the binding record. **Amendment 1 was made after launch,** while the run was in progress and before any E9 output had been retrieved or seen. *(Corrected 27 Oct 2026: an earlier version said this summary was written before the outputs were retrieved; that timing cannot be verified, so the claim was removed.)*
 
 ## 0. Scope
 

@@ -15,7 +15,7 @@
 | `E7` | E7 | Thinking on (4,096); 28 calls / 8 min |
 | `E8_CONTROL`, `E8_TREATMENT` | E8 | Control = the E7 configuration; treatment = 36 calls |
 
-The invalid E3 confirmation run is excluded. The pilots (E5, E5G, E6R) used 10- or 4-task subsets and are reported only in their own records.
+The invalid E3 confirmation run is excluded. The pilots (E5, E5G, E6R, E9) used 10-, 4- or 8-task subsets and are reported only in their own records. E9's two rows in `summary.csv` are a runtime screening pilot on a stress-selected panel; its solve counts are not a criterion.
 
 ## Recompute everything
 

@@ -23,7 +23,7 @@ Each folder has:
 | E6R | Thinking-history retention, **mechanical pilot** | on (512) | 4 per arm | Thoughts dropped: *BROKEN* (thinking on 47% of calls). Thoughts kept: *MECHANICALLY CLEAN* (100%) | [e6r](e6r/RESULTS.md) |
 | E7 | Strong inference-only baseline reproduction | on (4,096) | 48 | 19/48; *NOT PROMISING* (registered; criterion later found flawed, verdict unchanged) | [e7](e7/RESULTS.md) |
 | E8 | Paired tool-call budget, 28 vs 36 | on (4,096) | 48 | 21 → 24/48, **exact McNemar p ≈ 0.25**; *E8 WIN*; mechanism *NOT CONFIRMED* | [e8](e8/RESULTS.md) |
-| E9 | Runtime budget, 8 vs 7 minutes at 32 calls | on (4,096) | 8 | **Run completed 27 Oct; not yet analysed — NOT INCLUDED** | [e9](e9/RESULTS.md) |
+| E9 | Runtime budget, 8 vs 7 minutes at 32 calls (stress-panel pilot) | on (4,096) | 8 | VALID; *MIXED* (7-minute arm: empty final patch on 4 tasks vs 0; all other conditions for preferring it passed). Solves 2 vs 3, not a criterion | [e9](e9/RESULTS.md) |
 
 **Notes**
 - **Not run:** E6A, a frozen sampling experiment, was held and never run. It is described in the E6R folder.
