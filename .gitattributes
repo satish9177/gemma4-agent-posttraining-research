@@ -1,0 +1,4 @@
+# Preregistered, hash-frozen research folders: stored byte-for-byte (no line-ending conversion), so every file
+# hashes to the SHA-256 recorded in its freeze manifest on any platform.
+analysis/tier_a_pilot/** -text
+phase0/adapter-serving-audit/** -text
