@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use this research record, please cite it as below."
+title: "When does trajectory fine-tuning help a thinking coding agent? Preregistered experiments and research plan for Gemma 4"
+type: software
+authors:
+  - given-names: Satish
+    family-names: Kommanaboina
+repository-code: "https://github.com/satish9177/gemma4-agent-posttraining-research"
+license: Apache-2.0
+date-released: "2026-10-27"
+keywords:
+  - Gemma 4
+  - coding agents
+  - LLM post-training
+  - trajectory fine-tuning
+  - preregistration
+  - LoRA

@@ -1,0 +1,78 @@
+{
+  "id": "E5G",
+  "name": "Research-only host-side progress guard pilot",
+  "status": "completed",
+  "status_note": "Pilot completed; as registered, no 48-task guard run followed.",
+  "design": "paired pilot, SHADOW (guard logs only) vs GUARD (guard enforces blocks); research-only instrument",
+  "scope_note": "Thinking off, 10 always-looping tasks. The broad reading at the time, that loops are intrinsic to the policy, was later superseded by thinking-on runs (E7, E8), which also changed budgets, prompt and agent design.",
+  "runs": [
+    {
+      "label": "pilot",
+      "validity": "VALID",
+      "frozen_utc": "2026-10-21T16:52:28Z",
+      "completed_utc": "2026-10-21T17:44Z",
+      "completed_utc_note": "approximate, minute precision",
+      "original_preregistration_sha256": "12264bf7482b3820ff49368af1162906811d2898b1bbe00e2ef37a0d3c5b9d15",
+      "n_tasks_per_arm": 10,
+      "task_set": "the 10 always-looping tasks of the fixed 48-task development panel (same as the E5 pilot)",
+      "concurrency": 1,
+      "arms": {
+        "SHADOW": {
+          "description": "guard decisions computed and logged; every call executed",
+          "calls_excluding_status": 436,
+          "attempted_repeats": 188,
+          "attempted_repeat_rate": 0.431,
+          "blocked_attempts": 0,
+          "would_block_decisions": 140,
+          "executed_repeats_nni": 188,
+          "near_repeats": 50,
+          "novel_observations": 159,
+          "successful_source_edits": 8,
+          "no_edit_tasks": 5,
+          "final_source_patch_tasks": 5,
+          "resolved_descriptive_only": 1
+        },
+        "GUARD": {
+          "description": "guard enforces blocks once an equivalent call has produced an identical result three times without an intervening state change",
+          "calls_excluding_status": 451,
+          "attempted_repeats": 183,
+          "attempted_repeat_rate": 0.406,
+          "blocked_attempts": 151,
+          "executed_repeats_nni": 32,
+          "near_repeats": 37,
+          "novel_observations": 158,
+          "successful_source_edits": 6,
+          "no_edit_tasks": 5,
+          "final_source_patch_tasks": 5,
+          "matched_window_share_novel_plus_edits": 0.032,
+          "model_time_on_blocked_attempts_s": 317,
+          "resolved_descriptive_only": 0
+        }
+      },
+      "registered_thresholds": {
+        "LOOPS REMOVED": "GUARD attempted-repeat rate <= 0.295",
+        "EVASION FLAG": "near repeats(GUARD) - near repeats(SHADOW) >= max(10, 0.25 x (attempted repeats(SHADOW) - attempted repeats(GUARD))); close-variant similarity >= 0.95",
+        "LOOP ELIMINATION SUCCESSFUL": "LOOPS REMOVED and not EVASION FLAG",
+        "BEHAVIORAL PROGRESS CREATED": "at least 2 of: no-edit tasks <= 3; final source-patch tasks >= 7; matched-window share of novel observations + source edits >= 0.25"
+      },
+      "registered_labels": {
+        "EXPERIMENT STATUS": "VALID",
+        "LOOPS REMOVED": "NO",
+        "EVASION FLAG": "NO",
+        "LOOP ELIMINATION SUCCESSFUL": "NO",
+        "BEHAVIORAL PROGRESS CREATED": "NO"
+      }
+    }
+  ],
+  "fixed_settings": {
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "max_output_tokens": 8192,
+    "thinking": "off",
+    "budgets": {"per_task_minutes": 3, "tool_calls": 50, "turns": 150, "per_command_seconds": 90}
+  },
+  "model": "gemma-4-31b-it (QAT W4A16 checkpoint)",
+  "serving": {"engine": "vLLM 0.19.1", "tensor_parallel": 4, "hardware": "4x NVIDIA L4"},
+  "public_record_is_sanitized": true,
+  "withheld": ["task identifiers", "raw traces", "prompts and agent bundles", "harness-dependent scripts"]
+}

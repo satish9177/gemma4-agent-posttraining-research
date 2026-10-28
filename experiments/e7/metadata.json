@@ -1,0 +1,50 @@
+{
+  "id": "E7",
+  "name": "Strong inference-only baseline reproduction",
+  "status": "completed",
+  "runs": [
+    {
+      "label": "main",
+      "validity": "VALID",
+      "frozen_utc": "2026-10-24T10:03:06Z",
+      "launched_utc": "2026-10-24T10:48:33Z",
+      "completed_utc": "2026-10-24T15:01:39Z",
+      "completed_utc_basis": "first status check that showed the run complete (run duration 4.19 h)",
+      "original_preregistration_sha256": "f79d7b678843fa4ada6125c11e5ca185a5cc2faad85df0f907b4e680c8e9c6e9",
+      "original_freeze_manifest_file_count": 69,
+      "arms": {
+        "E7": {"max_tool_calls": 28, "solved": 19, "n": 48}
+      },
+      "validity_gates": {"V1": "PASS", "V2": "PASS", "V3": "PASS", "V4": "PASS", "V5": "PASS", "V6": "PASS", "V7": "PASS", "V8": "PASS"},
+      "projected_120_task_runtime_h": 10.64,
+      "registered_verdicts": {
+        "go_no_go": "E7 NOT PROMISING  [CF4 new failure category (E3T max <= 2, E7 >= 8 tasks)]"
+      },
+      "post_hoc_not_registered": {
+        "criterion_flawed": true,
+        "cf4_flag_category": "ANY:BudgetExceeded (tool-call budget refusals; a resource-budget label, not a semantic failure)",
+        "cf4_flag_tasks": 9,
+        "call_cap_hits_registered_readout": 0,
+        "call_cap_hits_corrected": 20,
+        "solved_among_tasks_using_all_28_calls": 5,
+        "documented_in": "E8 preregistration (sanitized summary in experiments/e8/PREREGISTRATION.md)",
+        "registered_verdict_changed": false
+      }
+    }
+  ],
+  "model": "gemma-4-31b-it (QAT W4A16 checkpoint)",
+  "sampling": {
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "max_output_tokens": 8192,
+    "thinking": true,
+    "thinking_budget": 4096,
+    "thoughts_retained_in_history": true
+  },
+  "budgets": {"time_minutes": 8, "tool_calls": 28, "turns": 80, "command_timeout_s": 240},
+  "serving": {"engine": "vLLM 0.19.1", "tensor_parallel": 4, "hardware": "4x NVIDIA L4"},
+  "panel": {"n_tasks": 48, "description": "fixed 48-task development panel of Python repository issues"},
+  "configuration_source": "publicly shared strong community configuration for Gemma 4 31B (thinking on, 4,096-token thinking budget, thoughts retained), run unchanged; attribution in the repository licensing file",
+  "public_record_is_sanitized": true,
+  "withheld": ["task identifiers", "raw traces", "prompts and agent bundles", "harness-dependent scripts"]
+}

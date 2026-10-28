@@ -1,0 +1,96 @@
+{
+  "id": "E6R",
+  "name": "Thinking-history retention pilot",
+  "status": "completed",
+  "design": "mechanical pilot",
+  "design_note": "Small mechanical pilot (4 tasks per arm); measures model behaviour, not solve rate. No performance verdict was registered.",
+  "runs": [
+    {
+      "label": "pilot",
+      "validity": "VALID",
+      "frozen_utc": "2026-10-21T20:28:10Z",
+      "launched_utc": "2026-10-22T03:03:43Z",
+      "completed_utc": "2026-10-22T03:39Z",
+      "completed_utc_note": "approximate, minute precision",
+      "original_preregistration_sha256": "cf128c6d36b0d902c0fb187fc352d4f493fed310df01132422d54931de8d465a",
+      "n_tasks_per_arm": 4,
+      "task_set": "4 public gold-validated tasks outside the 48-task development panel, chosen earlier by a seeded rule",
+      "concurrency": 1,
+      "arms": {
+        "THINK_DROP": {
+          "runner_arm": "CONTROL",
+          "description": "earlier reasoning removed from the conversation history",
+          "completed_tool_calls": 103,
+          "calls_with_reasoning": 48,
+          "thinking_active_share": 0.466,
+          "max_reasoning_tokens": 518,
+          "no_tool_call_turns": 5,
+          "corrupted_tool_calls": 6,
+          "traced_tool_calls": 99,
+          "finish_length": 0,
+          "context_window_exceeded": 0,
+          "calls_per_task": 25.8,
+          "model_call_s_median": 2.8,
+          "three_min_caps": 1,
+          "compactions": 2,
+          "resolved_descriptive_only": 2,
+          "checks": {"K1": false, "K2": true, "K3": true, "K4": true, "K5": true}
+        },
+        "THINK_KEEP": {
+          "runner_arm": "TREATMENT",
+          "description": "earlier reasoning kept on earlier assistant tool-call turns",
+          "completed_tool_calls": 77,
+          "calls_with_reasoning": 77,
+          "thinking_active_share": 1.0,
+          "max_reasoning_tokens": 516,
+          "no_tool_call_turns": 2,
+          "corrupted_tool_calls": 0,
+          "traced_tool_calls": 75,
+          "finish_length": 0,
+          "context_window_exceeded": 0,
+          "calls_per_task": 19.2,
+          "model_call_s_median": 3.9,
+          "three_min_caps": 3,
+          "compactions": 4,
+          "resolved_descriptive_only": 1,
+          "checks": {"K1": true, "K2": true, "K3": true, "K4": true, "K5": true}
+        }
+      },
+      "registered_thresholds": {
+        "K1": "thinking active on >= 90% of completed tool-bearing calls",
+        "K2": "max reasoning tokens <= 544 (512 budget + 32 for markers)",
+        "K3": "no-tool-call turns <= 5% and corrupted calls <= 15% of traced calls",
+        "K4": "no finish_reason length and <= 4 context-window overflows",
+        "K5": "history as configured: THINK_DROP, no request carries earlier reasoning; THINK_KEEP, >= 90% of requests with an earlier assistant turn carry reasoning on at least one of them",
+        "labels": "K1 or K2 fails -> BROKEN; K2 not evaluable -> NOT EVALUABLE; K3-K5 pass -> MECHANICALLY CLEAN; otherwise CLEAN WITH ISSUES"
+      },
+      "registered_labels": {
+        "pilot_status": "VALID",
+        "THINK_DROP": "BROKEN",
+        "THINK_KEEP": "MECHANICALLY CLEAN"
+      }
+    }
+  ],
+  "fixed_settings": {
+    "temperature": 1.0,
+    "top_p": 0.95,
+    "top_k": "64 (server default, not sent)",
+    "max_output_tokens": 8192,
+    "thinking": "on",
+    "thinking_token_budget": 512,
+    "budgets": {"per_task_minutes": 3, "tool_calls": 50, "turns": 150, "per_command_seconds": 90}
+  },
+  "model": "gemma-4-31b-it (QAT W4A16 checkpoint)",
+  "serving": {"engine": "vLLM 0.19.1", "tensor_parallel": 4, "hardware": "4x NVIDIA L4"},
+  "public_record_is_sanitized": true,
+  "withheld": ["task identifiers", "raw traces", "prompts and agent bundles", "harness-dependent scripts"],
+  "related_held_experiment": {
+    "id": "E6A",
+    "status": "held, not run",
+    "description": "Paired 48-task experiment on the development panel: frozen thinking-off agent at temperature 0.2 vs the identical agent at temperature 1.0 (model-card standard sampling), asking whether the repetition behaviour is a product of near-greedy decoding. Preregistration and a verdict-structure amendment were frozen and validated, but the run was never launched; no data exist and no conclusion is drawn.",
+    "frozen_utc": "2026-10-21T20:18:43Z",
+    "original_preregistration_sha256": "b94f9a3345f622664a833a8615dc0f6f98a688f47e2019005d32041b084b9ee2",
+    "amendment_v2_frozen_utc": "2026-10-21T20:54:34Z",
+    "amendment_v2_sha256": "b3cc490549438d701e421552b948c033fabc8dc435479fbd13876986b3d58cdc"
+  }
+}
