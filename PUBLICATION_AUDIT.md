@@ -36,7 +36,7 @@ no broken relative links or anchors, and every external URL answered.*
 | No power claim assumes N ≈ 300 | **PASS** | The earlier power figures (300 and 200 tasks) were withdrawn from RESEARCH_PLAN §5 and replaced by the rule that power is recomputed from the realized Tier A size. The only remaining "300" is in the compute section, which states that the evaluation line was sized for about 300 tasks and will be re-fixed with the tier sizes, and in the original inventory report, which carries a dated update note. |
 | The post-release date is never relaxed | **PASS** | Tier A requires a pull request created on or after 2026-04-02. Tier B is separate and secondary. The mining window starts on 13 May 2026 only because published data cover the earlier part. |
 | README links | **PASS** | All relative links and anchors resolve; external URLs answer. |
-| Author and citation metadata | **PASS, with one open item** | `CITATION.cff`, the README byline and the git author agree. The family name in `CITATION.cff` has not yet been confirmed by the author. |
+| Author and citation metadata | **PASS** | `CITATION.cff`, the README byline and the git author agree. The author confirmed the name "Satish Kommanaboina" on 28 Oct 2026. |
 
 ## Disclosed open issues (not failures)
 
