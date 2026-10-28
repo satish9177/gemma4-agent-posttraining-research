@@ -1,0 +1,38 @@
+{
+ "frozen_utc": "2026-10-28T11:50:57Z",
+ "note": "Frozen after the CPU-only preflight and before any GPU step. data/ is not committed (regenerate with build_prompts.py; hashes must match).",
+ "model": {
+  "id": "google/gemma-4-12B-it",
+  "revision": "707f0a3b8a3c7ad586ed01e27eafbad8a27dd0f7",
+  "model.safetensors_bytes": 23919549408
+ },
+ "pins": {
+  "python": "3.12.10",
+  "vllm": "0.32.0",
+  "torch": "2.13.0+cu130",
+  "transformers": "5.19.0",
+  "peft": "0.21.2",
+  "accelerate": "1.15.0",
+  "all_packages": "PREFLIGHT.json"
+ },
+ "compute": {
+  "provider": "Modal",
+  "gpu": "A100-80GB",
+  "list_price_usd_per_gpu_hour": 2.5,
+  "modal_gpu_driver": "610.57.04 (CUDA 13.3), per Modal docs on 2026-10-28"
+ },
+ "files": {
+  "PREREGISTRATION.md": "de31fbb63c34fce1af90bfc7d1a2b61008a6c925c2750eb8152c32182d5216e9",
+  "METRICS.md": "6ec10e7bd7604f65592a51973d39cca0f682db9aaa606ec6f719814269f6643d",
+  "config.yaml": "7dccf700c9caaee4f0c246e343faec2c5690483c07f14b54de38eb53a368b586",
+  "build_prompts.py": "de00df8b741fc2ec89e81c12dac0d9fd2950674748e86218de1f2f7c65e46831",
+  "audit_modal.py": "3f67904b1b942e6c723b51d3032232a1a954aab5b4b3620299f0af1ba6fc0039",
+  "preflight_modal.py": "a7f5fe675d5b5f1269bcd77cdb185a010a4d2ea1c44e2eddb51d8a25c50df10d",
+  "analyze_audit.py": "cd4907fb44c1d56de9427743a5fe11c7aa0b875b1723700341bc1d0ca5bfe272",
+  "prompts_summary.json": "a8af747cd9271b7ff40ce429e16910a4ec3f7734f73d5c9f68f58d3ac90f4c4c",
+  "PREFLIGHT.json": "c867884f0442363998abd60554428fd54a5969a2224b562107a9e5fb1c47542f",
+  "data/eval_prompts.jsonl": "848090ecd7743e146d64fcf856ffd3dff1c55eb1a74ec8790a6b11a1fa6301fa",
+  "data/train_marker.jsonl": "9e7cc5869659a5305a83474fcc0dbd83eee7966a485f9aebe419eee78f5c28b4",
+  "data/train_diffuse.jsonl": "a4a3af579f58bbfee6dc3cfc35fca2b04328e6e093e0bf2ea77e4b523c5eea2e"
+ }
+}

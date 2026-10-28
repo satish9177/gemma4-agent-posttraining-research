@@ -1,6 +1,14 @@
 # Phase 0: adapter train/serve consistency audit
 
-**Status: PLANNED, not run. No results exist yet.** This folder holds the draft preregistration, the metric definitions and the configuration scaffold. The audit code will be added and the preregistration frozen (SHA-256) immediately before the first GPU run. Results will be added as `RESULTS.md`, pass or fail.
+**Status: preregistered and frozen (`FREEZE.json`), GPU steps not yet run. No results exist yet.**
+- **Done (CPU only):** the model download and the preflight checks (`PREFLIGHT.json`).
+- **Not yet run:** the GPU steps. Modal requires a payment method on the workspace before any GPU function can be created.
+- **Results:** will be added as `RESULTS.md`, pass or fail.
+
+Files:
+- **Protocol:** [PREREGISTRATION.md](PREREGISTRATION.md) (v1, Stage A).
+- **Code:** `audit_modal.py` (all steps), `preflight_modal.py` (CPU-only steps), `analyze_audit.py` (metrics and gate).
+- **Data:** `build_prompts.py` builds the prompts.
 
 ## Question
 
@@ -28,7 +36,7 @@ The same trained adapters are served through four paths, all from bf16 weights:
 | vLLM runtime LoRA | The path under test |
 | vLLM, merged weights | The fallback serving path |
 
-Descriptive only: vLLM runtime LoRA on an FP8 base, and on the QAT W4A16 base.
+Descriptive only, deferred from this first stage (v1): vLLM runtime LoRA on an FP8 base, and on the QAT W4A16 base.
 
 ## Measured
 

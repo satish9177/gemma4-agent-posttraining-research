@@ -1,0 +1,14 @@
+{
+ "selected": 150,
+ "pr_fetched": 150,
+ "diff_fetched": 150,
+ "has_test_patch": 149,
+ "has_gold_patch": 150,
+ "has_runnable_test_file": 147,
+ "recipe_source": {
+  "swe_rebench_monthly": 35,
+  "swe_rebench_v1": 104,
+  "generic": 11
+ },
+ "pilot_tasks_sha256": "6d0d4998ce12b557fda96685591eb77d31b76d3dfd2d569be7b261f68c233800"
+}

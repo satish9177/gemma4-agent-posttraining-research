@@ -36,3 +36,11 @@ PRIVATE_*
 Thumbs.db
 .vscode/
 .idea/
+
+# Pilot task data (patches from third-party repositories; hashes are frozen, data re-fetchable)
+analysis/tier_a_pilot/data/
+analysis/tier_a_pilot/runs/
+
+# Phase 0 local data and raw outputs (third-party text; hashes are frozen)
+phase0/adapter-serving-audit/data/
+phase0/adapter-serving-audit/raw/

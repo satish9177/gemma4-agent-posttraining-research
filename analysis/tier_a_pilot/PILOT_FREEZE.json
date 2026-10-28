@@ -1,0 +1,14 @@
+{
+ "files": {
+  "PREREGISTRATION.md": "65c62224619ffbbc24223f0a96f08bb05919f897065fb0b751be82263edf401f",
+  "data/pilot_tasks.jsonl": "6d0d4998ce12b557fda96685591eb77d31b76d3dfd2d569be7b261f68c233800",
+  "harness_dev_tasks.py": "47b5690b6c5635c87372aa2907707b2105e7d34c126dab7f273cdd3dd040f7c0",
+  "pilot_candidates.csv": "2ea62ed82e96b987314e4e255dc05281d04a865c9bb49acf948b571b4b71adc4",
+  "pilot_prepare_summary.json": "e3beb70ab90a3191079be0825c3597347ec0253fa6e0ecdca899825fd79b7276",
+  "prepare_pilot.py": "05643b8908cd6711513bb16a98479487de41c901f13692e6afcd37b4378b9af1",
+  "select_pilot.py": "b0717535adb2f9162f0b276b3719ecf9f9f245a1b6688c0774165614608b862f",
+  "summarize_pilot.py": "14246d7af844629a71af799f9cf9a4b3a17cb52f75d198ed3412f5d571a7318a",
+  "validate_pilot.py": "28834e7ff8d89c7aaa43377858093df1362577da6b12d9583450dca1e58732c2"
+ },
+ "frozen_utc": "2026-10-28T09:00:23Z"
+}

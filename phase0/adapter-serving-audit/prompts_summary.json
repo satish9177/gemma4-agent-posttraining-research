@@ -1,0 +1,15 @@
+{
+ "dolly_file_sha256": "2df9083338b4abd6bceb5635764dab5d833b393b55759dffb0959b6fcbf794ec",
+ "dolly_rows_usable": 15011,
+ "general_eval": 250,
+ "agent_eval": 250,
+ "train_marker": 1600,
+ "train_diffuse": 1600,
+ "marker": "ZQX-AUDIT-MARKER",
+ "seed": 20261027,
+ "files": {
+  "eval_prompts.jsonl": "848090ecd7743e146d64fcf856ffd3dff1c55eb1a74ec8790a6b11a1fa6301fa",
+  "train_diffuse.jsonl": "a4a3af579f58bbfee6dc3cfc35fca2b04328e6e093e0bf2ea77e4b523c5eea2e",
+  "train_marker.jsonl": "9e7cc5869659a5305a83474fcc0dbd83eee7966a485f9aebe419eee78f5c28b4"
+ }
+}
