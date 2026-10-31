@@ -1,0 +1,4 @@
+python 3.13.15
+PASS V1: ledger and compaction counts as recorded before the freeze
+PASS V2: 207 compactions; without a ledger task-run 0; without an overlapping summary request 0
+PASS V3: 132 first compactions with calls on both sides; n_messages not dropping 0; completed calls overlapping a compaction 0

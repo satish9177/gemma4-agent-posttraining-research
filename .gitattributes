@@ -1,0 +1,5 @@
+# Hash-frozen analysis folders: stored byte-for-byte (no line-ending conversion), so every file hashes to the
+# SHA-256 recorded for it on any platform.
+analysis/compaction_thinking/** -text
+analysis/quit_rule_whatif/** -text
+analysis/serving_code_comparison/** -text
