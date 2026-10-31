@@ -1,0 +1,12 @@
+E8 CONTROL 28/8
+  solved first-edit call: [4, 6, 6, 7, 7, 7, 7, 8, 8, 10, 11, 11, 13, 16, 17, 17, 19, 21, 23, 25, 27]  median 11
+  unsolved: never edited 12 of 27 ; first-edit calls of the rest [5, 5, 6, 11, 11, 12, 14, 14, 17, 20, 21, 23, 24, 26, 27]
+  test runs per task: median 0.0  tasks with 0 test runs 36
+E8 TREATMENT 36/8
+  solved first-edit call: [5, 5, 7, 7, 7, 8, 9, 9, 10, 10, 11, 11, 11, 12, 16, 17, 20, 22, 27, 28, 28, 29, 30, 30]  median 11.0
+  unsolved: never edited 9 of 24 ; first-edit calls of the rest [5, 5, 9, 10, 10, 12, 14, 14, 16, 17, 17, 21, 33, 34, 35]
+  test runs per task: median 0.0  tasks with 0 test runs 33
+E7 28/8
+  solved first-edit call: [5, 6, 6, 7, 7, 7, 8, 9, 10, 11, 12, 12, 13, 13, 13, 15, 20, 20, 23]  median 11
+  unsolved: never edited 15 of 29 ; first-edit calls of the rest [6, 6, 8, 8, 9, 11, 15, 17, 23, 24, 26, 27, 28, 28]
+  test runs per task: median 0.0  tasks with 0 test runs 33

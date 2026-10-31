@@ -1,0 +1,4 @@
+PASS V1 no-rule rows reproduce E9 section 8
+PASS V2 counted calls = harness tool_calls
+notes: {"count_mismatch": [], "solved_without_detected_source_edit": []}
+screen: {"passing": [], "named": null}

@@ -45,6 +45,15 @@ All runs used Gemma 4 31B (QAT W4A16) served by vLLM on 4× NVIDIA L4. Paired ex
 
 The longer write-up is the [technical note](TECHNICAL_NOTE.md).
 
+**Post-hoc analyses and a code comparison (30 October – 1 November 2026).** These are not experiments and carry no
+registered verdict. Each analysis was frozen before its outcome was computed.
+
+| Analysis | Result | Record |
+|---|---|---|
+| **Does thinking fade after history compaction?** First compaction in 124 task-runs of E7–E9, against never-compacted histories at the same call index | No meaningful drop: −0.3 points (95% interval −1.0 to 0.0). Compaction kept the thoughts on all three retained turns | [analysis/compaction_thinking/](analysis/compaction_thinking/README.md) |
+| **Early-quit rules on existing runs.** 31 rules ("no edit by call N", "K failing tests in a row") | None passes the screen; 26 of 64 solves made their first edit after call 12 | [analysis/quit_rule_whatif/](analysis/quit_rule_whatif/README.md) |
+| **Serving code.** The evaluation environment's patched vLLM 0.19.1 vs upstream, on the Gemma 4 LoRA paths | The LoRA alias bug (vLLM #39815) is patched; the K=V mismatch (#61267, #62034) is not. Code reading only | [analysis/serving_code_comparison/](analysis/serving_code_comparison/README.md) |
+
 ## 4. Research principles
 
 - **Preregistration before every GPU run.** Question, arms, validity gates and decision rules are written down first.
@@ -81,6 +90,9 @@ Details: [docs/methodology.md](docs/methodology.md).
 | [experiments/](experiments/README.md) | One folder per experiment (E3–E9): sanitized preregistration, results, metadata |
 | [results/](results/README.md) | Aggregate results and anonymized per-task outcomes |
 | [analysis/](analysis/) | Statistics verification script; post-release task inventory; mining-feasibility stage and candidate inventories for both tiers |
+| [analysis/compaction_thinking/](analysis/compaction_thinking/README.md) | Post-hoc: does thinking fade after history compaction? |
+| [analysis/quit_rule_whatif/](analysis/quit_rule_whatif/README.md) | Post-hoc: early-quit rules on existing runs |
+| [analysis/serving_code_comparison/](analysis/serving_code_comparison/README.md) | Patched vs upstream vLLM 0.19.1 on the Gemma 4 LoRA paths |
 | [phase0/adapter-serving-audit/](phase0/adapter-serving-audit/README.md) | Preregistration and metrics for the planned train/serve audit |
 | [scripts/](scripts/) | Generic tooling (SHA-256 freeze manifests) |
 | [docs/methodology.md](docs/methodology.md) | How experiments are designed, frozen, validated and reported |

@@ -1,0 +1,28 @@
+{
+ "frozen_utc": "2026-10-31T17:33:01Z",
+ "n_files": 22,
+ "sha256": {
+  "audit/compaction_thinking/PLAN.md": "0eed7c82d6b2f801504b592b6d723bec8b36746c1550e8b4024549c7751fac4d",
+  "audit/compaction_thinking/ct_analysis.py": "47a7f1edbb07015f3d116680432fde075f69ac9a3c407fe9694932f3631d98e8",
+  "audit/compaction_thinking/freeze.py": "8fe472bf4eb7216e3c1a893474730533ab2366bcd0886875155d657f0f5c1261",
+  "audit/compaction_thinking/probe_stdout.txt": "f28d13a81463f52a21b7b22fa6915c2e071aeb49a1278d38195919e6571d41ae",
+  "audit/compaction_thinking/probe_structure.py": "2ba9a00876ce8556594e53805af5c43470799bd5441ee21cebab7122d0f810f9",
+  "audit/compaction_thinking/test_ct_analysis.py": "92b8696d8b49e24106fc14f007738950e36ad959251c55f334a56f1e0463fb3d",
+  "audit/compaction_thinking/validation/checks_stdout.txt": "a6f601796d8a642a2064499ff74a256ab2f84a160e8e62086fa3219e5405e47f",
+  "audit/compaction_thinking/validation/standin_drop/RESULTS_TABLE.md": "89fb4d4f04cd580efafb7e2eab16098b45b18534642133c5f0470f799a272883",
+  "audit/compaction_thinking/validation/standin_drop/event_study.csv": "73b91731d2ac54bc741a560dbd48e9598aa2ba77bb409532e3495bf1d2ea1954",
+  "audit/compaction_thinking/validation/standin_drop/results.json": "d612d136f9ae294e0345043d2532fdd302e784190e9b318e6c9bf11ae55f3b7c",
+  "audit/compaction_thinking/validation/standin_drop_stdout.txt": "d9be4daff18880c07d4b719f86759cea9805e7c066ed49466e4d6a14f707b3e9",
+  "audit/compaction_thinking/validation/standin_null/RESULTS_TABLE.md": "58c2aab6261ddffea8b6660f09cc77c042f040b81ef16c16e812c7981a9ed298",
+  "audit/compaction_thinking/validation/standin_null/event_study.csv": "069e1595e4073c99ebe0ec6a9bcd06edbdadb089d76254952d01e0813f25add8",
+  "audit/compaction_thinking/validation/standin_null/results.json": "7ea3d76cf3c8db5f588b6d7e7e9b2e5c8a64a4851c1fbea40ccf194d339a5c9f",
+  "audit/compaction_thinking/validation/standin_null_stdout.txt": "f88999766a4d08043486b0303c28ef3e6189e5a6d04e60c3d30626dd213526c8",
+  "audit/compaction_thinking/validation/test_stdout.txt": "6301ff4799a79c2989c1f97b6c435f38ccb0eb5be216957639bc1cb739eb12a1",
+  "audit/e7/e7_output/compactions.jsonl": "6f96827680813f0367e75425b518768fdc6eec14a0e93bba68de093bed237cda",
+  "audit/e7/e7_output/think_ledger.jsonl": "fd635816ba7119202934cbd9025b4c6d432034d5def3eb5a2504b2e0310087bf",
+  "audit/e8/e8_output/compactions.jsonl": "169bf9df67bac66c4a07f1dd56d618719152df646d4f2fa1a22ad7c6e8ed4961",
+  "audit/e8/e8_output/think_ledger.jsonl": "a9a1386220c9c4062645d7ca4ab28c1b627a9973ee8b5c5d4def50fb7fa83a8f",
+  "audit/e9_runtime_pilot/e9_output/compactions.jsonl": "e4ffe2166f9dcfd1993004d1ff05771253b45665634f1cf20eba8ce00fef3d38",
+  "audit/e9_runtime_pilot/e9_output/think_ledger.jsonl": "1fe7fb4a57fe3e6bdfdc620d25cf3b65bbd1d7df731ff2f5da0ba0ffe66c86ec"
+ }
+}
